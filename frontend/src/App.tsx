@@ -1,3 +1,4 @@
+import { Footer } from "./components/Footer"
 import Navbar from "./components/Navbar"
 import About from "./pages/About"
 import Data from "./pages/Data"
@@ -20,6 +21,7 @@ function App() {
       <Konsultasi />
       <Dokumentasi />
       <Team />
+      <Footer />
     </>
   )
 }
