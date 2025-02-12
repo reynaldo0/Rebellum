@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import Kasus from "./pages/Kasus"
 import Konsultasi from "./pages/Konsultasi"
 import Pengaruh from "./pages/Pengaruh"
+import Team from "./pages/Team"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Data />
       <Konsultasi />
       <Dokumentasi />
+      <Team />
     </>
   )
 }

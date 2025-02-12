@@ -68,40 +68,6 @@ const Team: React.FC = () => {
                             icon="logo-github"
                         />
                     </TeamCard.Item>
-                    <TeamCard.Item
-                        image="/team/nazla.jpg"
-                        name="Nazla Rahma"
-                        description="UI/UX, Illustrator">
-                        <TeamCard.Link
-                            href="https://www.instagram.com/nazlarhm96"
-                            icon="logo-instagram"
-                        />
-                        <TeamCard.Link
-                            href="https://www.linkedin.com/in/nazla-rahma/"
-                            icon="logo-linkedin"
-                        />
-                        <TeamCard.Link
-                            href="https://github.com/zlaraa"
-                            icon="logo-github"
-                        />
-                    </TeamCard.Item>
-                    <TeamCard.Item
-                        image="/team/akmal.jpg"
-                        name="Muhammad Akmal S."
-                        description="Programmer">
-                        <TeamCard.Link
-                            href="https://www.instagram.com/m.akmal.saban"
-                            icon="logo-instagram"
-                        />
-                        <TeamCard.Link
-                            href="#"
-                            icon="logo-linkedin"
-                        />
-                        <TeamCard.Link
-                            href="https://github.com/AkmaldanKamu"
-                            icon="logo-github"
-                        />
-                    </TeamCard.Item>
                 </TeamCard>
             </div>
         </section>
