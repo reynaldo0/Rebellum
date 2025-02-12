@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar"
 import About from "./pages/About"
 import Data from "./pages/Data"
+import Dokumentasi from "./pages/Dokumentasi"
 import Home from "./pages/Home"
 import Kasus from "./pages/Kasus"
 import Konsultasi from "./pages/Konsultasi"
@@ -16,6 +17,7 @@ function App() {
       <Pengaruh />
       <Data />
       <Konsultasi />
+      <Dokumentasi />
     </>
   )
 }
