@@ -45,9 +45,10 @@ const Kasus = () => {
                     ? "rounded-r-2xl"
                     : "border-r-2"
                 }`}
-                ref={(el) =>
-                  (buttonRefs.current[index] = el as HTMLButtonElement)
-                }>
+                ref={(el) => {
+                    if (el) buttonRefs.current[index] = el;
+                }}
+                >
                 <img
                   src={kasus.button.image}
                   alt=""

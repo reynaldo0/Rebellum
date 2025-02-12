@@ -103,9 +103,9 @@ export const Data = () => {
                         {dataButtonList.map((button, index) => (
                             <button
                                 key={index}
-                                ref={(e) =>
-                                    (buttonRefs.current[index] = e as HTMLButtonElement)
-                                }
+                                ref={(e) => {
+                                    if (e) buttonRefs.current[index] = e;
+                                }}                                
                                 data-aos="fade-in"
                                 data-aos-duration={300}
                                 className="flex w-full max-w-xs cursor-pointer gap-2 rounded-xl bg-[#6874B9] p-3 transition hover:-translate-y-1 hover:bg-yellow hover:opacity-90 md:w-fit">
