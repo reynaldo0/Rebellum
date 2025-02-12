@@ -213,3 +213,34 @@ button:hover .button-text {
     @apply bg-yellow text-white;
     transform: rotateY(180deg);
 }
+
+.spinner::before,
+.spinner::after {
+    content: "";
+    width: var(--size);
+    height: var(--size);
+    background: var(--first);
+    border-radius: 100%;
+    position: absolute;
+    top: 10%;
+    transform: translateY(-50%);
+    animation: bounce 1s ease-in-out alternate infinite;
+}
+
+.spinner::after {
+    background: var(--second);
+
+    animation: bounce 1s 0.5s ease-in-out alternate infinite;
+}
+
+@keyframes bounce {
+    50% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
