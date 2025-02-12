@@ -129,3 +129,87 @@ button:hover .button-text {
 .vektor_konseling {
     @apply absolute -right-[160px] top-1/2 z-10 h-auto max-w-[50%] -translate-y-[53%];
 }
+
+@media screen and (max-width: 768px) {
+    .backg {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 200px;
+        margin-top: 7vh;
+        z-index: 1;
+    }
+
+    .vektor_konseling {
+        position: sticky;
+        top: auto;
+        margin-bottom: 100px;
+        right: auto;
+        max-width: 100%;
+    }
+
+    .text_konsultasi {
+        max-width: 100%;
+        margin-left: 0;
+        font-size: 11px;
+        margin-top: -30vh;
+        text-align: start;
+    }
+
+    .text_konsultasi h1 {
+        font-size: 20px;
+        padding: 0px;
+        margin-top: -20px;
+        line-height: 25px;
+    }
+
+    .text_konsultasi p {
+        font-size: 14px;
+        line-height: 20px;
+        margin-top: 20px;
+    }
+
+    .input_konsultasi {
+        font-size: 14px;
+        margin-top: 10px;
+        text-align: center;
+    }
+}
+
+.line {
+    @apply absolute -bottom-1 left-0 -z-[99] h-2 w-0 bg-yellow;
+}
+
+.flip-card {
+    @apply h-80 w-56 scale-75 bg-transparent md:scale-100;
+    perspective: 1000px;
+}
+
+.swiper-slide-active .flip-card-front {
+    @apply border border-primary-200;
+}
+
+.title {
+    @apply text-center text-2xl font-black;
+}
+
+.flip-card-inner {
+    @apply relative h-full w-full text-center transition-transform duration-700;
+    transform-style: preserve-3d;
+}
+
+.flip-card-front,
+.flip-card-back {
+    @apply absolute h-full w-full rounded-2xl border shadow-lg;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    @apply bg-white text-black shadow-xl;
+}
+
+.flip-card-back {
+    @apply bg-yellow text-white;
+    transform: rotateY(180deg);
+}
