@@ -109,3 +109,23 @@ button:hover .button-text {
 .transition-height {
     transition: height 0.3s ease;
 }
+
+.text_konsultasi {
+    @apply ml-5 max-w-[65%] text-white;
+}
+
+.input_konsultasi {
+    @apply mb-1 mt-5 w-full rounded-[200px] p-[10] text-base text-black;
+}
+
+.input-group {
+    @apply mt-5;
+}
+
+.btn_konsultasi {
+    @apply cursor-pointer rounded-[15px] bg-yellow px-7 py-2.5 text-lg transition duration-300 ease-linear hover:bg-[#ffac2f];
+}
+
+.vektor_konseling {
+    @apply absolute -right-[160px] top-1/2 z-10 h-auto max-w-[50%] -translate-y-[53%];
+}
