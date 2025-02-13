@@ -1,4 +1,4 @@
-import TeamCard from "../components/SwiperCard";
+import TeamCard from "../../components/SwiperCard";
 
 const Team: React.FC = () => {
     return (

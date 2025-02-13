@@ -10,9 +10,9 @@ import {
     Filler,
 } from "chart.js";
 import { useEffect, useRef } from "react";
-import { dataButtonList } from "../docs/dataButton";
-import { data, DataChart } from "../docs/dataChart";
-import City from "../components/City";
+import { dataButtonList } from "../../docs/dataButton";
+import { data, DataChart } from "../../docs/dataChart";
+import City from "../../components/City";
 
 Chart.register(
     LineController,

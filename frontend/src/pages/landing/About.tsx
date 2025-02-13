@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import useScrollAnimation from "../func/scrollAnimation";
-import Logo from "../components/Logo";
+import useScrollAnimation from "../../func/scrollAnimation";
+import Logo from "../../components/Logo";
 
 const About = () => {
   const lineRef = useRef(null);

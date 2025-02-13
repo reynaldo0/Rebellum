@@ -1,13 +1,13 @@
 import { Footer } from "./components/Footer"
 import Navbar from "./components/Navbar"
-import About from "./pages/About"
-import Data from "./pages/Data"
-import Dokumentasi from "./pages/Dokumentasi"
-import Home from "./pages/Home"
-import Kasus from "./pages/Kasus"
-import Konsultasi from "./pages/Konsultasi"
-import Pengaruh from "./pages/Pengaruh"
-import Team from "./pages/Team"
+import About from "./pages/landing/About"
+import Data from "./pages/landing/Data"
+import Dokumentasi from "./pages/landing/Dokumentasi"
+import Home from "./pages/landing/Home"
+import Kasus from "./pages/landing/Kasus"
+import Konsultasi from "./pages/landing/Konsultasi"
+import Pengaruh from "./pages/landing/Pengaruh"
+import Team from "./pages/landing/Team"
 
 function App() {
   return (
