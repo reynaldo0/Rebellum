@@ -38,6 +38,21 @@
             <div class="p-4 rounded-lg dark:border-gray-700 mt-14">
                 <h1 class="text-lg font-semibold mb-5">@yield('title')</h1>
 
+                @if (session('success'))
+                    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                        role="alert">
+                        <span class="font-medium">Sukses!</span> {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                        role="alert">
+                        <span class="font-medium">Gagal!</span> {{ session('error') }}
+                    </div>
+                @endif
+
+
                 @yield('content')
             </div>
         </div>
