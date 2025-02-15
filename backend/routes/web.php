@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminQuizController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ArticleDetailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
@@ -62,6 +63,6 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-
+Route::resource('chat', ChatController::class);
 
 require __DIR__ . '/auth.php';

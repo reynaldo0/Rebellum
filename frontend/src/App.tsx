@@ -1,3 +1,5 @@
+
+import Chat from "./pages/landing/Chat";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -28,6 +30,7 @@ function App() {
               <Konsultasi />
               <Dokumentasi />
               <Team />
+              <Chat />
               <Footer />
             </>
           }
