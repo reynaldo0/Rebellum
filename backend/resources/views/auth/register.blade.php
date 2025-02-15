@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="bg-white shadow-lg rounded-lg flex flex-col md:flex-row max-w-7xl w-full">
+    <div class="bg-white shadow-lg rounded-lg flex flex-col md:flex-row max-w-7xl h-auto md:h-[570px] w-full">
         <!-- Left Side (Illustration) -->
         <div class="w-full md:w-1/2 p-10 flex flex-col items-center justify-center">
             <img src="/illustrator/logo.png" alt="Illustration" class="w-60 md:w-60">
@@ -14,7 +14,9 @@
             <h1 class="text-2xl font-bold text-gray-900 mt-1">
                 Daftar Sekarang untuk Mengakses Dashboard
             </h1>
-
+            <div class="flex justify-center md:hidden">
+                <img src="/illustrator/register.svg" alt="Illustration" class="mt-6 w-48">
+            </div>
             <form method="POST" action="{{ route('register') }}" class="mt-6">
                 @csrf
                 <div>
