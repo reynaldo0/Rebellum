@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,11 +23,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // article
     Route::resource('articles', ArticleController::class);
+    Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+        // users
+        Route::resource('users', UserController::class);
+    });
+    });
 
-    // users
-    Route::resource('users', UserController::class);
-});
+
 
 require __DIR__ . '/auth.php';
