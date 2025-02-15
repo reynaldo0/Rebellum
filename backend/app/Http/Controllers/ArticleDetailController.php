@@ -9,7 +9,8 @@ class ArticleDetailController extends Controller
 {
     public function index()
     {
-        $articles = Article::latest()->paginate(6); // Menampilkan 6 artikel per halaman
+        $articles = Article::where('status', 'approved')->latest()->paginate(6);
+
         return view('pages.admin.detail_artikel', compact('articles'));
     }
 

@@ -31,12 +31,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}', [ArticleDetailController::class, 'show'])->name('articles.detail.show');
     });
 
+    Route::get('/articles-submissions', [ArticleController::class, 'submissions'])->name('articles.submissions');
 
     Route::middleware(['auth', AdminMiddleware::class])->group(function () {
         // users
         Route::resource('users', UserController::class);
+
+        Route::get('/articles-history', [ArticleController::class, 'history'])->name('articles.history');
+
+        Route::patch('/articles/{id}/approve', [ArticleController::class, 'approve'])->name('articles.approve');
+        Route::patch('/articles/{id}/reject', [ArticleController::class, 'reject'])->name('articles.reject');
     });
-    });
+});
 
 
 
