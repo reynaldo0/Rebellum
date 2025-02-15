@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ArticleDetailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
@@ -24,6 +25,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('articles', ArticleController::class);
+
+    Route::prefix('articles-detail')->group(function () {
+        Route::get('/', [ArticleDetailController::class, 'index'])->name('articles.detail.index');
+        Route::get('/{id}', [ArticleDetailController::class, 'show'])->name('articles.detail.show');
+    });
+
+
     Route::middleware(['auth', AdminMiddleware::class])->group(function () {
         // users
         Route::resource('users', UserController::class);

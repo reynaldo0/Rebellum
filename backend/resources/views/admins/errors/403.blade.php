@@ -58,7 +58,7 @@
             </div>
         </center>
         <center class="mt-6">
-            <a href="#" class="text-gray-500 font-mono text-xl bg-gray-200 p-3 rounded-md hover:shadow-md">Kembali
+            <a href="{{ route('dashboard') }}" class="text-gray-500 font-mono text-xl bg-gray-200 p-3 rounded-md hover:shadow-md">Kembali
             </a>
         </center>
     </div>
