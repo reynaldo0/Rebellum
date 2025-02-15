@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="bg-white shadow-lg rounded-lg flex flex-col md:flex-row-reverse max-w-7xl h-screen md:h-[570px] w-full">
+    <div class="bg-white shadow-lg rounded-lg flex flex-col md:flex-row max-w-7xl h-screen md:h-[570px] w-full">
         <!-- Left Side (Illustration) -->
         <div class="w-full md:w-1/2 p-10 flex flex-col items-center justify-center">
             <img src="/illustrator/logo.png" alt="Illustration" class="w-60 md:w-60">
@@ -7,7 +7,7 @@
                 Ayo mulai petualangan baru! Masukkan detail Anda untuk masuk dan nikmati kemudahan dalam mengelola
                 konten dengan cepat dan efisien.
             </p>
-            <img src="/illustrator/register.svg" alt="Illustration" class="mt-6 w-48 md:w-72 hidden md:block">
+            <img src="/illustrator/login.svg" alt="Illustration" class="mt-6 w-48 md:w-72 hidden md:block">
         </div>
 
         <!-- Right Side (Login Form) -->
