@@ -22,16 +22,16 @@ class ScoreController extends Controller
 
         Score::create([
             'user_id' => Auth::id(),
-            'quiz_id' => $quiz->id,
             'score' => $score
         ]);
 
-        return redirect()->route('pages.quiz.index')->with('success', 'Quiz berhasil dikerjakan!');
+        return redirect()->route('pages.user.quiz.index')->with('score', $score);
     }
+
 
     public function indexAdmin()
     {
-        $scores = Score::with('user')->get();
-        return view('pages.quiz.score', compact('scores'));
+        $scores = Score::with('user', 'quiz')->get();
+        return view('pages.admin.quiz.score', compact('scores'));
     }
 }

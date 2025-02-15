@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminQuizController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ArticleDetailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserQuizController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/quiz', [QuizController::class, 'index'])->name('pages.quiz.index');
+    Route::get('/soal', [UserQuizController::class, 'index'])->name('pages.user.quiz.index');
+
     Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
 
     Route::resource('articles', ArticleController::class);
@@ -39,15 +42,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/articles-submissions', [ArticleController::class, 'submissions'])->name('articles.submissions');
 
     Route::middleware(['auth', AdminMiddleware::class])->group(function () {
-        // users
+        // Manage Users
         Route::resource('users', UserController::class);
 
+        // Article history and approve
         Route::get('/articles-history', [ArticleController::class, 'history'])->name('articles.history');
-
         Route::patch('/articles/{id}/approve', [ArticleController::class, 'approve'])->name('articles.approve');
         Route::patch('/articles/{id}/reject', [ArticleController::class, 'reject'])->name('articles.reject');
 
+        // QUIZ Score
         Route::get('/scores', [ScoreController::class, 'indexAdmin'])->name('admin.scores');
+        // QUIZ CRUD
+        Route::get('/quiz', [AdminQuizController::class, 'index'])->name('admin.quiz.index');
+        Route::get('/quiz/create', [AdminQuizController::class, 'create'])->name('admin.quiz.create');
+        Route::post('/quiz', [AdminQuizController::class, 'store'])->name('admin.quiz.store');
+        Route::get('/quiz/{quiz}/edit', [AdminQuizController::class, 'edit'])->name('admin.quiz.edit');
+        Route::put('/quiz/{quiz}', [AdminQuizController::class, 'update'])->name('admin.quiz.update');
+        Route::delete('/quiz/{quiz}', [AdminQuizController::class, 'destroy'])->name('admin.quiz.destroy');
     });
 });
 
