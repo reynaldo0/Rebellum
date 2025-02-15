@@ -5,21 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class Score extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
-
     protected $fillable = [
-        'title',
-        'description',
-        'user_id',
-        'status'
+        'user_id',   // Tambahkan ini
+        'quiz_id',
+        'score',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
+
 }
