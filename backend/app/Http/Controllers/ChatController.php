@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\NewChatMessage;
 use App\Models\ChatMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ChatController extends Controller
 {
@@ -27,18 +28,18 @@ class ChatController extends Controller
     {
         $request->validate(['message' => 'required|string']);
 
-        if (!session()->has('nickname')) {
-            session(['nickname' => $this->generateAnonymousName()]);
+        if (!session()->has('username')) {
+            session(['username' => $this->generateAnonymousName()]);
         }
 
-        $nickname = session('nickname');
+        $username = session('username');
 
         $message = ChatMessage::create([
-            'nickname' => $nickname,
+            'username' => $username,
             'message' => $request->message,
         ]);
 
-        broadcast(new NewChatMessage($message))->toOthers();
+        NewChatMessage::dispatch($message);
 
         return response()->json($message);
     }
