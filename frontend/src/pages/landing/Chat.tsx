@@ -32,8 +32,6 @@ const Chat = () => {
     const pusher = new Pusher("cb18b6e07fc02084de32", {
       cluster: "ap1",
       wsHost: "127.0.0.1",
-      forceTLS: false,
-      disableStats: true,
     });
 
     Pusher.logToConsole = true;
