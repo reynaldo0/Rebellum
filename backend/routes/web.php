@@ -3,6 +3,8 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ArticleDetailController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizController;
+use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/quiz', [QuizController::class, 'index'])->name('pages.quiz.index');
+    Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
+
     Route::resource('articles', ArticleController::class);
 
     Route::prefix('articles-detail')->group(function () {
@@ -41,6 +46,8 @@ Route::middleware('auth')->group(function () {
 
         Route::patch('/articles/{id}/approve', [ArticleController::class, 'approve'])->name('articles.approve');
         Route::patch('/articles/{id}/reject', [ArticleController::class, 'reject'])->name('articles.reject');
+
+        Route::get('/scores', [ScoreController::class, 'indexAdmin'])->name('admin.scores');
     });
 });
 
