@@ -13,7 +13,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::where('status', 'approved')->get();
+        $userRole = Auth::user()->role;
+        if ($userRole == 'admin') {
+            $articles = Article::where('status', 'approved')->get();
+        }else {
+            $articles = Article::where('user_id', Auth::user()->id)->get();
+        }
 
         return view('pages.admin.artikel', compact('articles'));
     }
@@ -103,7 +108,7 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
         $article->update(['status' => 'rejected']);
 
-        return redirect()->back()->with('error', 'Artikel telah ditolak.');
+        return redirect()->back()->with('success', 'Artikel berhasil ditolak.');
     }
 
     public function history()

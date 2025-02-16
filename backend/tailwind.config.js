@@ -18,6 +18,9 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                // yellow: "#F89B11",
+            }
         },
     },
 
