@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Article;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class AdminMiddleware
         if (!Auth::check() || Auth::user()->role !== 'admin') {
             return response()->view('admins.errors.403', [], 403);
         }
+
         return $next($request);
     }
 }

@@ -15,11 +15,17 @@ class Article extends Model
         'title',
         'description',
         'user_id',
-        'status'
+        'image',
+        'status',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

@@ -16,7 +16,7 @@ class ArticleDetailController extends Controller
 
     public function show($id)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::with('comments')->findOrFail($id);
         return view('pages.admin.show_artikel', compact('article'));
     }
 }

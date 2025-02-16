@@ -7,6 +7,12 @@
         @foreach ($articles as $article)
             <div class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
                 <div class="p-4">
+                    <div class="w-full h-[200px] bg-red-400 overflow-hidden">
+                        <img class="w-full h-full object-cover"
+                            src="{{ $article->image ? asset('storage/' . $article->image) : 'https://placehold.co/200' }}"
+                            alt="{{ $article->title }}">
+                    </div>
+
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                         {{ $article->title }}
                     </h3>
@@ -16,7 +22,7 @@
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-xs text-gray-400">Dibuat oleh: {{ $article->user->name }}</span>
                         <a href="{{ route('articles.detail.show', $article->id) }}"
-                           class="text-blue-500 hover:text-blue-700 text-sm font-medium">
+                            class="text-blue-500 hover:text-blue-700 text-sm font-medium">
                             Baca Selengkapnya
                         </a>
                     </div>
