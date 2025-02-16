@@ -26,7 +26,13 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $validated['image'] = $image->store('articles', 'public');
+        }
 
         $validated['user_id'] = Auth::user()->id;
 

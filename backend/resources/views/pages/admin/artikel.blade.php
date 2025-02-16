@@ -41,7 +41,8 @@
                             {{ $article->user->name }}
                         </td>
                         <td class="px-6 py-4">
-                            <a href="{{ route('articles.show', $article->id) }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2 rounded">
+                            <a href="{{ route('articles.show', $article->id) }}"
+                                class="inline-block bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2 rounded">
                                 <i class="bx bx-show"></i>
                             </a>
                             <button data-modal-target="modal-edit-{{ $article->id }}"
@@ -87,9 +88,16 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form method="POST" action="{{ route('articles.store') }}" class="p-4 md:p-5">
+                <form method="POST" action="{{ route('articles.store') }}" class="p-4 md:p-5" enctype="multipart/form-data">
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
+                        <div class="col-span-2">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="image">Thumbnail</label>
+                            <input
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                id="image" name="image" type="file" accept="image/*">
+                        </div>
                         <div class="col-span-2">
                             <label for="name"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Judul</label>
@@ -154,7 +162,7 @@
                                 <textarea id="description" rows="4" name="description"
                                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Write product description here">{{ $article->description }}
-                                                                        </textarea>
+                                                                                        </textarea>
                             </div>
                         </div>
 
