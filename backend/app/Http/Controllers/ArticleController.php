@@ -26,7 +26,13 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $validated['image'] = $image->store('articles', 'public');
+        }
 
         $validated['user_id'] = Auth::user()->id;
 
@@ -45,9 +51,10 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+    public function show(string $id)
     {
-        //
+        $article = Article::with('comments')->findOrFail($id);
+        return view('pages.admin.show_artikel', compact('article'));
     }
 
     /**

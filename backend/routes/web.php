@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminQuizController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ArticleDetailController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
@@ -25,16 +26,19 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::resource('articles', ArticleController::class)->only('show');
+Route::resource('chat', ChatController::class);
+Route::post('/comment/{id}', [CommentController::class, 'store'])->name('comment.store');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/soal', [UserQuizController::class, 'index'])->name('user.quiz.index');
-
     Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
 
-    Route::resource('articles', ArticleController::class);
+    Route::resource('articles', ArticleController::class)->except('show');
 
     Route::prefix('articles-detail')->group(function () {
         Route::get('/', [ArticleDetailController::class, 'index'])->name('articles.detail.index');
@@ -73,7 +77,5 @@ Route::middleware('auth')->group(function () {
         Route::post('/quiz/categories/', [CategoryController::class, 'store'])->name('admin.categories.store');
     });
 });
-
-Route::resource('chat', ChatController::class);
 
 require __DIR__ . '/auth.php';
