@@ -8,34 +8,53 @@
             @method('PUT')
             <div>
                 <label class="block text-gray-700 font-semibold">Pertanyaan</label>
-                <input type="text" name="question" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" value="{{ $quiz->question }}" required>
+                <input type="text" name="question"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300"
+                    value="{{ $quiz->question }}" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold">Pilihan A</label>
-                <input type="text" name="option_a" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" value="{{ $quiz->option_a }}" required>
+                <input type="text" name="option_a"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300"
+                    value="{{ $quiz->option_a }}" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold">Pilihan B</label>
-                <input type="text" name="option_b" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" value="{{ $quiz->option_b }}" required>
+                <input type="text" name="option_b"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300"
+                    value="{{ $quiz->option_b }}" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold">Pilihan C</label>
-                <input type="text" name="option_c" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" value="{{ $quiz->option_c }}" required>
+                <input type="text" name="option_c"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300"
+                    value="{{ $quiz->option_c }}" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold">Pilihan D</label>
-                <input type="text" name="option_d" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" value="{{ $quiz->option_d }}" required>
+                <input type="text" name="option_d"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300"
+                    value="{{ $quiz->option_d }}" required>
             </div>
             <div>
+                <label class="block text-gray-700 font-semibold">Nilai Soal</label>
+                <input type="number" name="score" value="{{ $quiz->score }}"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" required
+                    min="1" max="100">
+            </div>
+
+            <div>
                 <label class="block text-gray-700 font-semibold">Jawaban Benar</label>
-                <select name="correct_answer" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" required>
+                <select name="correct_answer"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" required>
                     <option value="A" {{ $quiz->correct_answer == 'A' ? 'selected' : '' }}>A</option>
                     <option value="B" {{ $quiz->correct_answer == 'B' ? 'selected' : '' }}>B</option>
                     <option value="C" {{ $quiz->correct_answer == 'C' ? 'selected' : '' }}>C</option>
                     <option value="D" {{ $quiz->correct_answer == 'D' ? 'selected' : '' }}>D</option>
                 </select>
             </div>
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Update</button>
+            <button type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Update</button>
         </form>
     </div>
 @endsection
