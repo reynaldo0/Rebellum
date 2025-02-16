@@ -83,15 +83,16 @@ class AdminQuizController extends Controller
     public function show($id)
     {
         $category = Category::findOrFail($id);
-        $totalScore = Quiz::where('category_id', $category->id)->sum('score');
+
+        // Hitung total skor dari kategori ini
+        $totalScore = $category->quizzes()->sum('score');
 
         if ($totalScore < 100) {
             return redirect()->back()->with('error', 'Kategori ini belum memiliki total nilai 100, tambahkan lebih banyak soal.');
         }
 
-        return view('quiz.show', compact('category'));
+        return view('pages.admin.quiz.show', compact('category'));
     }
-
 
     /**
      * Remove the specified resource from storage.

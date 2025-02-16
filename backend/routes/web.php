@@ -34,7 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/soal', [UserQuizController::class, 'index'])->name('user.quiz.index');
+    Route::get('/user/quiz', [UserQuizController::class, 'index'])->name('user.quiz.index');
+    Route::get('/user/quiz/{categoryId}', [UserQuizController::class, 'show'])->name('user.quiz.show');
+    Route::post('/user/quiz/submit', [UserQuizController::class, 'submit'])->name('user.quiz.submit');
     Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
 
     Route::resource('articles', ArticleController::class)->except('show');

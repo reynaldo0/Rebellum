@@ -2,41 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 
 class UserQuizController extends Controller
 {
-    // Menampilkan daftar quiz untuk user
+    // Menampilkan daftar kategori quiz untuk user
     public function index()
     {
-        $quizzes = Quiz::all();
-        return view('pages.user.quiz.index', compact('quizzes'));
+        // Ambil kategori yang memiliki total skor minimal 100
+        $categories = Category::whereIn('id', function ($query) {
+            $query->select('category_id')
+                ->from('quizzes')
+                ->groupBy('category_id')
+                ->havingRaw('SUM(score) >= 100');
+        })->get();
+
+        return view('pages.user.quiz.index', compact('categories'));
     }
 
-    // Menampilkan detail quiz agar user bisa mengerjakan
-    public function show($id)
+    // Menampilkan quiz berdasarkan kategori yang dipilih user
+    public function show($categoryId)
     {
-        $quiz = Quiz::findOrFail($id);
-        return view('pages.user.quiz.show', compact('quiz'));
+        $category = Category::findOrFail($categoryId);
+        $quizzes = Quiz::where('category_id', $categoryId)->get();
+
+        return view('pages.user.quiz.show', compact('category', 'quizzes'));
     }
 
     // Proses menyimpan jawaban user
-    public function submit(Request $request, $id)
+    public function submit(Request $request)
     {
-        $request->validate([
-            'answer' => 'required|in:A,B,C,D'
-        ]);
+        // Debugging: Cek apakah data dikirim dengan benar
+        if (!$request->has('answers')) {
+            return response()->json(['error' => 'No answers submitted'], 400);
+        }
 
-        // Ambil quiz berdasarkan ID
-        $quiz = Quiz::findOrFail($id);
+        $answers = $request->input('answers');
+        $score = 0;
 
-        // Cek apakah jawaban benar
-        $isCorrect = $quiz->correct_answer === $request->answer;
+        foreach ($answers as $quizId => $userAnswer) {
+            $quiz = Quiz::find($quizId);
+            if ($quiz && $quiz->correct_answer === $userAnswer) {
+                $score += 10; // Misal 10 poin per jawaban benar
+            }
+        }
 
-        return redirect()->route('user.quiz.index')->with(
-            'status',
-            $isCorrect ? 'Jawaban benar!' : 'Jawaban salah!'
-        );
+        // Pastikan JSON response dikirim dengan benar
+        return response()->json(['score' => $score]);
     }
 }

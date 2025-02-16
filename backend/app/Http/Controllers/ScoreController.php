@@ -15,7 +15,7 @@ class ScoreController extends Controller
         $score = 0;
 
         foreach ($quizzes as $quiz) {
-            if ($request->input("quiz_{$quiz->id}") === $quiz->correct_answer) {
+            if ($request->input("answers.{$quiz->id}") === $quiz->correct_answer) {
                 $score++;
             }
         }
@@ -25,7 +25,7 @@ class ScoreController extends Controller
             'score' => $score
         ]);
 
-        return redirect()->route('user.quiz.index')->with('score', $score);
+        return redirect()->back()->with('score', $score);
     }
 
 
