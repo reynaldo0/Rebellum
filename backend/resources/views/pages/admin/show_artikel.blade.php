@@ -4,6 +4,10 @@
 
 @section('content')
     <div class="bg-white rounded-lg shadow-md p-6 dark:bg-gray-800">
+        <img class="max-w-full h-auto max-h-[300px] mb-4"
+            src="{{ $article->image ? asset('storage/' . $article->image) : 'https://placehold.co/200' }}"
+            alt="thumnail article">
+
         <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ $article->title }}</h1>
         <p class="text-gray-500 dark:text-gray-400 mt-2">{{ $article->description }}</p>
         <p class="text-sm text-gray-400 mt-4">Dibuat oleh: {{ $article->user->name }} |
@@ -14,8 +18,8 @@
             <div class="flex justify-between items-center">
                 <h2 class="text-2xl font-bold mb-4">Comments</h2>
                 <button data-modal-target="modal-create" data-modal-toggle="modal-create"
-                    class="inline-block h-fit bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-2 rounded">Tambah
-                    Komentar
+                    class="inline-block h-fit bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-2 rounded">
+                    Tambah Komentar
                 </button>
             </div>
             {{-- Display existing comments --}}
@@ -24,7 +28,7 @@
                     <div class="p-2 border-t">
                         <div class="flex items-start mb-2">
                             <div
-                                class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
+                                class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-white font-bold">
                                 {{ substr($comment->username, 0, 1) }}
                             </div>
                             <div class="ml-3">
@@ -82,12 +86,12 @@
                             <label for="content"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Komentar</label>
                             <textarea id="content" rows="4" name="content"
-                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                 placeholder="input komentar"></textarea>
                         </div>
                     </div>
                     <button type="submit"
-                        class="text-white inline-flex w-full justify-center items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        class="text-white inline-flex w-full justify-center items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
                         Tambah
                     </button>
                 </form>

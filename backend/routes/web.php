@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ArticleDetailController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UserController;
@@ -40,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
 
     Route::resource('articles', ArticleController::class)->except('show');
+    Route::post('articles/{article}/like', [LikeController::class, 'likeArticle'])->name('articles.like');
 
     Route::prefix('articles-detail')->group(function () {
         Route::get('/', [ArticleDetailController::class, 'index'])->name('articles.detail.index');
