@@ -42,7 +42,7 @@ class AdminQuizController extends Controller
 
         Quiz::create($request->all());
 
-        return redirect()->route('pages.admin.quiz.index')->with('success', 'Quiz berhasil ditambahkan!');
+        return redirect()->route('admin.quiz.index')->with('success', 'Quiz berhasil ditambahkan!');
     }
 
     /**
@@ -71,7 +71,7 @@ class AdminQuizController extends Controller
         $quiz = Quiz::findOrFail($id);
         $quiz->update($request->all());
 
-        return redirect()->route('pages.admin.quiz.index')->with('success', 'Quiz berhasil diperbarui!');
+        return redirect()->route('admin.quiz.index')->with('success', 'Quiz berhasil diperbarui!');
     }
 
     /**
@@ -81,6 +81,6 @@ class AdminQuizController extends Controller
     {
         $quiz = Quiz::findOrFail($id);
         $quiz->delete();
-        return redirect()->route('pages.admin.quiz.index')->with('success', 'Quiz berhasil dihapus!');
+        return redirect()->route('admin.quiz.index')->with('success', 'Quiz berhasil dihapus!');
     }
 }
