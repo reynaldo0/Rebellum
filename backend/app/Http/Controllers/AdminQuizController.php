@@ -37,12 +37,13 @@ class AdminQuizController extends Controller
             'option_b' => 'required',
             'option_c' => 'required',
             'option_d' => 'required',
-            'correct_answer' => 'required|in:A,B,C,D'
+            'correct_answer' => 'required|in:A,B,C,D',
+            'score' => 'required|integer|min:1|max:100'
         ]);
 
         Quiz::create($request->all());
 
-        return redirect()->route('pages.admin.quiz.index')->with('success', 'Quiz berhasil ditambahkan!');
+        return redirect()->route('admin.quiz.index')->with('success', 'Quiz berhasil ditambahkan!');
     }
 
     /**
@@ -65,13 +66,14 @@ class AdminQuizController extends Controller
             'option_b' => 'required',
             'option_c' => 'required',
             'option_d' => 'required',
-            'correct_answer' => 'required|in:A,B,C,D'
+            'correct_answer' => 'required|in:A,B,C,D',
+            'score' => 'required|integer|min:1|max:100'
         ]);
 
         $quiz = Quiz::findOrFail($id);
         $quiz->update($request->all());
 
-        return redirect()->route('pages.admin.quiz.index')->with('success', 'Quiz berhasil diperbarui!');
+        return redirect()->route('admin.quiz.index')->with('success', 'Quiz berhasil diperbarui!');
     }
 
     /**
@@ -81,6 +83,6 @@ class AdminQuizController extends Controller
     {
         $quiz = Quiz::findOrFail($id);
         $quiz->delete();
-        return redirect()->route('pages.admin.quiz.index')->with('success', 'Quiz berhasil dihapus!');
+        return redirect()->route('admin.quiz.index')->with('success', 'Quiz berhasil dihapus!');
     }
 }

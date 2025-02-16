@@ -20,7 +20,8 @@
 
     <script>
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark')
@@ -39,9 +40,8 @@
                 <h1 class="text-lg font-semibold mb-5">@yield('title')</h1>
 
                 @if (session('success'))
-                    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-                        role="alert">
-                        <span class="font-medium">Sukses!</span> {{ session('success') }}
+                    <div class="mt-3 p-3 mb-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                        {{ session('success') }}
                     </div>
                 @endif
 
@@ -63,8 +63,7 @@
                         </ul>
                     </div>
                 @enderror
-
-
+                
                 @yield('content')
             </div>
         </div>

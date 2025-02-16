@@ -25,7 +25,7 @@ class ScoreController extends Controller
             'score' => $score
         ]);
 
-        return redirect()->route('pages.user.quiz.index')->with('score', $score);
+        return redirect()->route('user.quiz.index')->with('score', $score);
     }
 
 

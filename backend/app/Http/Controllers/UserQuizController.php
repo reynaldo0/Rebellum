@@ -34,7 +34,7 @@ class UserQuizController extends Controller
         // Cek apakah jawaban benar
         $isCorrect = $quiz->correct_answer === $request->answer;
 
-        return redirect()->route('pages.user.quiz.index')->with(
+        return redirect()->route('user.quiz.index')->with(
             'status',
             $isCorrect ? 'Jawaban benar!' : 'Jawaban salah!'
         );
