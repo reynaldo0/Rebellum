@@ -7,7 +7,6 @@ use App\Http\Controllers\ArticleDetailController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserQuizController;
