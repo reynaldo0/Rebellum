@@ -37,7 +37,7 @@
 
         <div class="p-4 sm:ml-64">
             <div class="p-4 rounded-lg dark:border-gray-700 mt-14">
-                <h1 class="text-lg font-semibold mb-5">@yield('title')</h1>
+                <h1 class="text-2xl font-semibold mb-5 text-gray-900 dark:text-white">@yield('title')</h1>
 
                 @if (session('success'))
                     <div class="mt-3 p-3 mb-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
@@ -63,7 +63,7 @@
                         </ul>
                     </div>
                 @enderror
-                
+
                 @yield('content')
             </div>
         </div>
