@@ -45,9 +45,10 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+    public function show(string $id)
     {
-        //
+        $article = Article::with('comments')->findOrFail($id);
+        return view('pages.admin.show_artikel', compact('article'));
     }
 
     /**

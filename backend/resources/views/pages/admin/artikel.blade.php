@@ -41,9 +41,9 @@
                             {{ $article->user->name }}
                         </td>
                         <td class="px-6 py-4">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2 rounded">
+                            <a href="{{ route('articles.show', $article->id) }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2 rounded">
                                 <i class="bx bx-show"></i>
-                            </button>
+                            </a>
                             <button data-modal-target="modal-edit-{{ $article->id }}"
                                 data-modal-toggle="modal-edit-{{ $article->id }}"
                                 class="bg-yellow-500 hover:bg-yellow-700 text-white text-sm font-bold py-1 px-2 rounded">
