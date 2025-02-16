@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.update.photo');
 
     Route::get('/user/quiz', [UserQuizController::class, 'index'])->name('user.quiz.index');
     Route::get('/user/quiz/{categoryId}', [UserQuizController::class, 'show'])->name('user.quiz.show');
