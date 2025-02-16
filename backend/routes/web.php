@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminQuizController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ArticleDetailController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ScoreController;
@@ -60,6 +61,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/quiz/{quiz}/edit', [AdminQuizController::class, 'edit'])->name('admin.quiz.edit');
         Route::put('/quiz/{quiz}', [AdminQuizController::class, 'update'])->name('admin.quiz.update');
         Route::delete('/quiz/{quiz}', [AdminQuizController::class, 'destroy'])->name('admin.quiz.destroy');
+
+        Route::get('/quiz/start/{category_id}', [AdminQuizController::class, 'startQuiz'])->name('quiz.start');
+
+        Route::get('/quiz/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+        Route::get('/admin/categories/{id}', [CategoryController::class, 'show'])->name('admin.categories.show');
+        Route::get('/admin/quiz/create/{category_id}', [AdminQuizController::class, 'create'])->name('admin.quiz.create');
+        Route::delete('/admin/categories/{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+
+
+        Route::post('/quiz/categories/', [CategoryController::class, 'store'])->name('admin.categories.store');
     });
 });
 

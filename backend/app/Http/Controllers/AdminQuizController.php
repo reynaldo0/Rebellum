@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,10 @@ class AdminQuizController extends Controller
      */
     public function index()
     {
-        $quizzes = Quiz::all();
-        return view('pages.admin.quiz.index', compact('quizzes'));
+        $quizzes = Quiz::with('category')->get();
+        $categories = Category::all();
+
+        return view('pages.admin.quiz.index', compact('quizzes', 'categories'));
     }
 
     /**
@@ -23,7 +26,8 @@ class AdminQuizController extends Controller
 
     public function create()
     {
-        return view('pages.admin.quiz.create');
+        $categories = Category::all();
+        return view('pages.admin.quiz.create', compact('categories'));
     }
 
     /**
@@ -76,6 +80,19 @@ class AdminQuizController extends Controller
         return redirect()->route('admin.quiz.index')->with('success', 'Quiz berhasil diperbarui!');
     }
 
+    public function show($id)
+    {
+        $category = Category::findOrFail($id);
+        $totalScore = Quiz::where('category_id', $category->id)->sum('score');
+
+        if ($totalScore < 100) {
+            return redirect()->back()->with('error', 'Kategori ini belum memiliki total nilai 100, tambahkan lebih banyak soal.');
+        }
+
+        return view('quiz.show', compact('category'));
+    }
+
+
     /**
      * Remove the specified resource from storage.
      */
@@ -84,5 +101,17 @@ class AdminQuizController extends Controller
         $quiz = Quiz::findOrFail($id);
         $quiz->delete();
         return redirect()->route('admin.quiz.index')->with('success', 'Quiz berhasil dihapus!');
+    }
+
+    public function startQuiz($category_id)
+    {
+        $category = Category::findOrFail($category_id);
+
+        if ($category->totalScore() < 100) {
+            return redirect()->back()->with('error', 'Kategori ini belum bisa dikerjakan, nilai totalnya kurang dari 100.');
+        }
+
+        $quizzes = Quiz::where('category_id', $category_id)->get();
+        return view('quiz.start', compact('quizzes', 'category'));
     }
 }

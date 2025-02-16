@@ -36,6 +36,14 @@
                     class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" required
                     min="1" max="100">
             </div>
+            <div class="mb-4">
+                <label for="category_id" class="block text-gray-700">Kategori</label>
+                <select name="category_id" id="category_id" class="w-full border-gray-300 rounded-lg">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div>
                 <label class="block text-gray-700 font-semibold">Jawaban Benar</label>
                 <select name="correct_answer"

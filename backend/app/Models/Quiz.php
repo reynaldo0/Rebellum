@@ -17,6 +17,7 @@ class Quiz extends Model
         'option_d',
         'correct_answer',
         'score',
+        'category_id',
     ];
 
     /**
@@ -26,5 +27,9 @@ class Quiz extends Model
     public function scores()
     {
         return $this->hasMany(Score::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

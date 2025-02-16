@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('quizzes', function (Blueprint $table) {
-            $table->integer('score')->default(0);
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->integer('max_score')->default(100);
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('quizzes', function (Blueprint $table) {
-            $table->dropColumn('score');
-        });
+        Schema::dropIfExists('categories');
     }
 };
