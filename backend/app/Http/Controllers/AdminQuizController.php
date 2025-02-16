@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminQuizController extends Controller
 {
@@ -114,5 +115,29 @@ class AdminQuizController extends Controller
 
         $quizzes = Quiz::where('category_id', $category_id)->get();
         return view('quiz.start', compact('quizzes', 'category'));
+    }
+
+    public function leaderboard(Request $request)
+    {
+        // Ambil semua kategori
+        $categories = Category::all();
+
+        // Cek apakah ada kategori yang dipilih
+        $categoryId = $request->query('category_id', $categories->first()->id ?? null);
+
+        // Ambil leaderboard berdasarkan kategori yang dipilih
+        $scores = collect(); // Pastikan variabel $scores selalu ada
+
+        if ($categoryId) {
+            $scores = DB::table('quiz_attempts') // Sesuaikan dengan tabel penyimpanan skor
+                ->join('users', 'quiz_attempts.user_id', '=', 'users.id')
+                ->where('quiz_attempts.category_id', $categoryId)
+                ->select('quiz_attempts.user_id', 'users.name', 'quiz_attempts.score')
+                ->orderByDesc('quiz_attempts.score')
+                ->get()
+                ->groupBy('user_id'); // Kelompokkan skor berdasarkan user_id
+        }
+
+        return view('pages.admin.quiz.leaderboard', compact('categories', 'scores', 'categoryId'));
     }
 }

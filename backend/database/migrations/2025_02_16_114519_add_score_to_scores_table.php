@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('scores', function (Blueprint $table) {
             $table->integer('score')->after('user_id');
+            $table->foreignId('quiz_id')->nullable()->after('score')->constrained()->onDelete('cascade');
         });
     }
 
@@ -23,6 +24,8 @@ return new class extends Migration
     {
         Schema::table('scores', function (Blueprint $table) {
             $table->dropColumn('score');
+            $table->dropForeign(['quiz_id']);
+            $table->dropColumn(['score', 'quiz_id']);
         });
     }
 };

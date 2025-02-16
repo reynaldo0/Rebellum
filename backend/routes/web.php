@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/articles/{id}/reject', [ArticleController::class, 'reject'])->name('articles.reject');
 
         // QUIZ Score
-        Route::get('/scores', [ScoreController::class, 'indexAdmin'])->name('admin.quiz.scores');
+        Route::get('/scores', [ScoreController::class, 'indexAdmin'])->name('admin.quiz.score');
         // QUIZ CRUD
         Route::get('/quiz', [AdminQuizController::class, 'index'])->name('admin.quiz.index');
         Route::get('/quiz/create', [AdminQuizController::class, 'create'])->name('admin.quiz.create');
@@ -73,10 +73,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/quiz/start/{category_id}', [AdminQuizController::class, 'startQuiz'])->name('quiz.start');
 
         Route::get('/quiz/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
-        Route::get('/admin/categories/{id}', [CategoryController::class, 'show'])->name('admin.categories.show');
-        Route::get('/admin/quiz/create/{category_id}', [AdminQuizController::class, 'create'])->name('admin.quiz.create');
-        Route::delete('/admin/categories/{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+        Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('admin.categories.show');
+        Route::get('/quiz/create/{category_id}', [AdminQuizController::class, 'create'])->name('admin.quiz.create');
+        Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
 
+        Route::get('/leaderboard', [AdminQuizController::class, 'leaderboard'])->name('admin.quiz.leaderboard');
 
         Route::post('/quiz/categories/', [CategoryController::class, 'store'])->name('admin.categories.store');
     });

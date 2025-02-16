@@ -2,7 +2,20 @@
 
 @section('content')
     <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg">
-        <h2 class="text-3xl font-bold mb-6 text-gray-700">📊 Hasil Quiz</h2>
+        <h2 class="text-3xl font-bold mb-6 text-gray-700">📊 Leaderboard Quiz</h2>
+
+        <!-- Pilihan Kategori -->
+        <form method="GET" action="{{ route('admin.quiz.leaderboard') }}" class="mb-4">
+            <label for="category_id" class="block text-gray-700 font-semibold mb-2">Pilih Kategori:</label>
+            <select name="category_id" id="category_id" onchange="this.form.submit()"
+                class="px-4 py-2 border rounded-md">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $category->id == $categoryId ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
 
         <div class="overflow-hidden border border-gray-200 rounded-lg">
             <table class="w-full border-collapse bg-white text-left">
@@ -14,21 +27,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $groupedScores = $scores->groupBy('user_id');
-                    @endphp
-
-                    @foreach ($groupedScores as $userId => $attempts)
+                    @forelse ($scores as $userId => $attempts)
                         <tr class="border-b hover:bg-gray-100 transition duration-300">
-                            <!-- Nama User -->
                             <td class="px-6 py-4 font-semibold text-gray-800 flex items-center gap-2">
                                 <div class="w-10 h-10 bg-blue-500 text-white flex items-center justify-center rounded-full font-bold text-lg">
-                                    {{ strtoupper(substr($attempts->first()->user->name, 0, 1)) }}
+                                    {{ strtoupper(substr($attempts->first()->name, 0, 1)) }}
                                 </div>
-                                {{ $attempts->first()->user->name }}
+                                {{ $attempts->first()->name }}
                             </td>
-
-                            <!-- Skor List -->
                             <td class="px-6 py-4 text-gray-700">
                                 <div class="flex flex-wrap gap-2">
                                     @foreach ($attempts as $attempt)
@@ -38,15 +44,19 @@
                                     @endforeach
                                 </div>
                             </td>
-
-                            <!-- Indikator Percobaan -->
                             <td class="px-6 py-4 text-gray-700">
                                 <span class="px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-full shadow-md">
                                     {{ $attempts->count() }}x Percobaan
                                 </span>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                                Tidak ada data untuk kategori ini.
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
