@@ -52,6 +52,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/articles-submissions', [ArticleController::class, 'submissions'])->name('articles.submissions');
 
+    Route::get('/consultation', [ConsultationController::class, 'create'])->name('consultation.create');
+
+    // Route for submitting the consultation form (POST request)
+    Route::post('/consultation', [ConsultationController::class, 'dashboard'])->name('consultation.store');
+
+
     Route::middleware(['auth', AdminMiddleware::class])->group(function () {
         // Manage Users
         Route::resource('users', UserController::class);
@@ -79,7 +85,7 @@ Route::middleware('auth')->group(function () {
 
         Route::post('/quiz/categories/', [CategoryController::class, 'store'])->name('admin.categories.store');
 
-        Route::get('/consultations', [ConsultationController::class, 'consultations'])->name('admin.consultations');
+        Route::get('/admin/consultations', [ConsultationController::class, 'consultations'])->name('admin.consultations');
     });
 });
 

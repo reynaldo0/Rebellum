@@ -27,6 +27,15 @@
                         <p class="mt-4 text-gray-600">Skor Anda: <span
                                 class="text-blue-600 font-semibold">{{ session('score') }}</span> dari 100
                         </p>
+                        @if (session('score') >= 10 && session('score') <= 30)
+                            <p class="mt-2 text-red-600">Coba lagi! Anda bisa melakukannya lebih baik.</p>
+                        @elseif(session('score') > 30 && session('score') <= 50)
+                            <p class="mt-2 text-yellow-600">Sedikit lagi! Terus berlatih untuk skor yang lebih tinggi.</p>
+                        @elseif(session('score') > 50 && session('score') <= 70)
+                            <p class="mt-2 text-blue-600">Bagus! Anda hampir mencapai skor maksimal.</p>
+                        @elseif(session('score') > 70 && session('score') <= 100)
+                            <p class="mt-2 text-green-600">Hebat! Skor Anda sangat luar biasa!</p>
+                        @endif
                     @endif
 
                     {{-- Tombol Tindakan --}}
@@ -75,7 +84,8 @@
                     <div class="mt-2 space-y-2">
                         @foreach (['A', 'B', 'C', 'D'] as $option)
                             <label class="flex items-center space-x-2">
-                                <input type="radio" name="answers[{{ $quiz->id }}]" value="{{ $option }}"" class="form-radio text-blue-500">
+                                <input type="radio" name="answers[{{ $quiz->id }}]" value="{{ $option }}""
+                                    class="form-radio text-blue-500">
                                 <span class="text-gray-600">{{ $quiz['option_' . strtolower($option)] }}</span>
                             </label>
                         @endforeach
@@ -102,7 +112,8 @@
                     // Optionally, highlight the unanswered question
                     document.querySelector(`#quiz-question-${questionId}`).classList.add('border-red-500');
                 } else {
-                    document.querySelector(`#quiz-question-${questionId}`).classList.remove('border-red-500');
+                    document.querySelector(`#quiz-question-${questionId}`).classList.remove(
+                        'border-red-500');
                 }
             });
 
