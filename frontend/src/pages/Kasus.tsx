@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import "swiper/css";
+import "swiper/swiper-bundle.css";
 import Swiper from "swiper/bundle";
 import { SwiperOptions } from "swiper/types";
-import { kasusList } from "../../docs/kasus";
+import { kasusList } from "../docs/kasus";
 // import 'swiper/css/bundle';
 
 const Kasus = () => {

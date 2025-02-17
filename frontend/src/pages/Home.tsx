@@ -1,6 +1,6 @@
-import { temuanUmum, TemuanUmum } from "../../docs/temuanUmum";
-import toggleAccordion from "../../func/accordion";
-import Sabit from "../../components/Sabit";
+import { temuanUmum, TemuanUmum } from "../docs/temuanUmum";
+import toggleAccordion from "../func/accordion";
+import Sabit from "../components/Sabit";
 import Typed from 'typed.js';
 import { useEffect, useRef } from "react";
 

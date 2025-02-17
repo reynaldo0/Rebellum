@@ -1,5 +1,5 @@
-import { Dampak, Solusi } from "../../components/Accordion";
-import Plane from "../../components/Plane";
+import { Dampak, Solusi } from "../components/Accordion";
+import Plane from "../components/Plane";
 
 const Pengaruh = () => {
     return (
