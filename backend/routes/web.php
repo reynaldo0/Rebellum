@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ArticleDetailController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScoreController;
@@ -80,6 +81,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/leaderboard', [AdminQuizController::class, 'leaderboard'])->name('admin.quiz.leaderboard');
 
         Route::post('/quiz/categories/', [CategoryController::class, 'store'])->name('admin.categories.store');
+
+        Route::get('/consultations', [ConsultationController::class, 'consultations']);
     });
 });
 

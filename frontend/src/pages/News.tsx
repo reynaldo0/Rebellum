@@ -82,7 +82,9 @@ const BlogPage = () => {
 
     return (
         <div className="container mx-auto px-6 py-16 md:py-24">
-            <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">Artikel Tentang Kenakalan Remaja</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800">Artikel Tentang 
+                <span className="text-yellow"> Kenakalan Remaja</span>
+            </h1>
 
             {/* Category Slider on Mobile, Static on Desktop */}
             <div className="mb-8">
@@ -105,7 +107,7 @@ const BlogPage = () => {
                             <SwiperSlide key={index}>
                                 <button
                                     onClick={() => setVisiblePosts(posts.filter((post) => post.category === category))}
-                                    className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none transition-colors duration-300"
+                                    className="px-6 py-3 bg-primary-200 text-white rounded-lg hover:bg-primary-100 focus:outline-none transition-colors duration-300"
                                 >
                                     {category}
                                 </button>
@@ -129,7 +131,7 @@ const BlogPage = () => {
                         <button
                             key={category}
                             onClick={() => setVisiblePosts(posts.filter((post) => post.category === category))}
-                            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none transition-colors duration-300"
+                            className="px-6 py-3 bg-primary-200 text-white rounded-lg hover:bg-primary-100 focus:outline-none transition-colors duration-300"
                         >
                             {category}
                         </button>
