@@ -25,6 +25,20 @@ class ArticleController extends Controller
         return view('pages.admin.artikel', compact('articles'));
     }
 
+    public function indexApi()
+    {
+        $articles = Article::with('category')->get(); // Mengambil kategori terkait
+
+        foreach ($articles as $article) {
+            // Pastikan URL gambar benar
+            $article->image = asset('storage/' . $article->image);
+        }
+
+        return response()->json($articles);
+    }
+
+
+
     public function create()
     {
         $categories = ArticleCategory::all();

@@ -1,113 +1,90 @@
 import IonIcon from "@reacticons/ionicons";
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 
-const categories = [
-    "Tawuran",
-    "Narkoba",
-    "Merokok",
-    "Seksual",
-    "Bullying",
-    "Mabuk"
-];
-
-const posts = [
-    {
-        category: "Bullying",
-        title: "Dampak Buruk Bullying pada Remaja",
-        date: "February 17, 2025",
-        content: "Bullying dapat menyebabkan trauma psikologis dan menurunkan kepercayaan diri remaja.",
-        image: "/carousel/bullying.png"
-    },
-    {
-        category: "Bullying",
-        title: "Bahaya Narkoba bagi Remaja",
-        date: "February 17, 2025",
-        content: "Penggunaan narkoba di kalangan remaja semakin meningkat dan berdampak buruk pada kesehatan.",
-        image: "/carousel/bullying.png"
-    },
-    {
-        category: "Mabok",
-        title: "Dampak Pergaulan Bebas terhadap Masa Depan Remaja",
-        date: "February 17, 2025",
-        content: "Pergaulan bebas dapat mengarah pada tindakan yang berisiko dan menghambat masa depan remaja.",
-        image: "/carousel/bullying.png"
-    },
-    {
-        category: "Mabok",
-        title: "Kenapa Kekerasan di Kalangan Remaja Meningkat?",
-        date: "February 17, 2025",
-        content: "Kekerasan antar remaja sering terjadi akibat tekanan lingkungan dan kurangnya kontrol emosi.",
-        image: "kekerasan.jpg"
-    },
-    {
-        category: "Bullying",
-        title: "Kenakalan Remaja di Sekolah dan Cara Mengatasinya",
-        date: "February 17, 2025",
-        content: "Tawuran dan bolos sekolah menjadi masalah besar dalam dunia pendidikan saat ini.",
-        image: "/carousel/bullying.png"
-    },
-    {
-        category: "Bullying",
-        title: "Kenakalan Remaja di Sekolah dan Cara Mengatasinya",
-        date: "February 17, 2025",
-        content: "Tawuran dan bolos sekolah menjadi masalah besar dalam dunia pendidikan saat ini.",
-        image: "/carousel/bullying.png"
-    },
-    {
-        category: "Mabok",
-        title: "Maraknya Cyberbullying di Kalangan Remaja",
-        date: "February 17, 2025",
-        content: "Cyberbullying di media sosial semakin marak dan berdampak negatif pada kesehatan mental remaja.",
-        image: "cyberbullying.jpg"
+const News = () => {
+    interface Post {
+        title: string;
+        image?: string;
+        date: string;
+        content: string;
+        category: { id: number; name: string };
     }
-];
 
-const BlogPage = () => {
-    const [visiblePosts, setVisiblePosts] = useState(posts);
-    const swiperRef = useRef<any>(null);
+    const [posts, setPosts] = useState<Post[]>([]);
+    const [visiblePosts, setVisiblePosts] = useState<Post[]>([]);
+    const [categories, setCategories] = useState<string[]>([]);
+    const [activeCategory, setActiveCategory] = useState<string | undefined>(undefined);
+    
+    // Create a reference to the Swiper instances for categories and posts
+    const categorySwiperRef = useRef<any>(null);
 
-    const handlePrev = () => {
-        if (swiperRef.current && swiperRef.current.swiper) {
-            swiperRef.current.swiper.slidePrev();
+    const handleCategoryPrev = () => {
+        if (categorySwiperRef.current && categorySwiperRef.current.swiper) {
+            categorySwiperRef.current.swiper.slidePrev();
         }
     };
 
-    const handleNext = () => {
-        if (swiperRef.current && swiperRef.current.swiper) {
-            swiperRef.current.swiper.slideNext();
+    const handleCategoryNext = () => {
+        if (categorySwiperRef.current && categorySwiperRef.current.swiper) {
+            categorySwiperRef.current.swiper.slideNext();
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const postResponse = await fetch("http://127.0.0.1:8000/api/article");
+                if (!postResponse.ok) {
+                    throw new Error("Failed to fetch data");
+                }
+                const postData: Post[] = await postResponse.json();
+                const filteredPosts = postData.filter(post => post.image && post.image.trim() !== "");
+                setPosts(filteredPosts);
+                setVisiblePosts(filteredPosts);
+                const uniqueCategories = Array.from(new Set(filteredPosts.map(post => post.category.name)));
+                setCategories(uniqueCategories);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const handleCategoryClick = (categoryName?: string) => {
+        setActiveCategory(categoryName);
+        if (!categoryName) {
+            setVisiblePosts(posts);
+        } else {
+            setVisiblePosts(posts.filter((post) => post.category.name === categoryName));
         }
     };
 
     return (
         <div className="container mx-auto px-6 py-16 md:py-24">
-            <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800">Artikel Tentang 
-                <span className="text-yellow"> Kenakalan Remaja</span>
+            <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800">
+                Artikel Tentang <span className="text-yellow">Kenakalan Remaja</span>
             </h1>
 
             {/* Category Slider on Mobile, Static on Desktop */}
             <div className="mb-8">
-                {/* Swiper for mobile with navigation arrows */}
+                {/* Swiper for Mobile */}
                 <div className="block md:hidden relative">
                     <Swiper
+                        ref={categorySwiperRef} // Attach the ref to the category swiper
                         spaceBetween={10}
-                        slidesPerView={2.5}  // Display 2.5 categories
+                        slidesPerView={2.5}
                         centeredSlides={true}
-                        loop={true}
-                        navigation={false}  // Disable default navigation
-                        breakpoints={{
-                            640: {
-                                slidesPerView: 2.5, // Show 2.5 categories on mobile
-                            },
-                        }}
-                        ref={swiperRef}
+                        loop={categories.length > 2}
                     >
-                        {categories.map((category, index) => (
-                            <SwiperSlide key={index}>
+                        {categories.map((category) => (
+                            <SwiperSlide key={category}>
                                 <button
-                                    onClick={() => setVisiblePosts(posts.filter((post) => post.category === category))}
-                                    className="px-6 py-3 bg-primary-200 text-white rounded-lg hover:bg-primary-100 focus:outline-none transition-colors duration-300"
+                                    onClick={() => handleCategoryClick(category)}
+                                    className={`px-6 py-3 rounded-lg transition-colors duration-300 ${activeCategory === category ? "bg-yellow text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                        }`}
                                 >
                                     {category}
                                 </button>
@@ -116,22 +93,30 @@ const BlogPage = () => {
                     </Swiper>
                     {/* Navigation Buttons */}
                     <div className="flex justify-between mt-4">
-                        <button onClick={handlePrev} className="absolute -left-5 top-0 z-[999] bg-white text-black rounded-full p-2">
+                        <button onClick={handleCategoryPrev} className="absolute -left-5 top-0 z-[999] bg-yellow text-white rounded-full p-2">
                             <IonIcon name="arrow-back" size="large" color="white" />
                         </button>
-                        <button onClick={handleNext} className="absolute -right-5 top-0 z-[999] bg-white text-black rounded-full p-2">
+                        <button onClick={handleCategoryNext} className="absolute -right-5 top-0 z-[999] bg-yellow text-white rounded-full p-2">
                             <IonIcon name="arrow-forward" size="large" color="white" />
                         </button>
                     </div>
                 </div>
 
-                {/* Static Category List on Desktop */}
+                {/* Static Category List for Desktop */}
                 <div className="hidden md:flex justify-center gap-6">
+                    <button
+                        onClick={() => handleCategoryClick(undefined)}
+                        className={`px-6 py-3 rounded-lg transition-colors duration-300 ${activeCategory === undefined ? "bg-yellow text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                            }`}
+                    >
+                        Semua
+                    </button>
                     {categories.map((category) => (
                         <button
                             key={category}
-                            onClick={() => setVisiblePosts(posts.filter((post) => post.category === category))}
-                            className="px-6 py-3 bg-primary-200 text-white rounded-lg hover:bg-primary-100 focus:outline-none transition-colors duration-300"
+                            onClick={() => handleCategoryClick(category)}
+                            className={`px-6 py-3 rounded-lg transition-colors duration-300 ${activeCategory === category ? "bg-yellow text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                }`}
                         >
                             {category}
                         </button>
@@ -139,26 +124,32 @@ const BlogPage = () => {
                 </div>
             </div>
 
-            {/* Posts Slider with Zoom-In Animation */}
+            {/* Posts Slider */}
             <Swiper
                 spaceBetween={20}
-                slidesPerView={1}
-                loop={true}
-                centeredSlides={true}
+                slidesPerView={1} // Default for mobile
+                loop={visiblePosts.length > 3}
+                centeredSlides={visiblePosts.length > 1}
+                watchOverflow={true}
                 breakpoints={{
                     640: {
-                        slidesPerView: 2,
+                        slidesPerView: 1, // For mobile, show 1 slide
+                        
                     },
-                    768: {
-                        slidesPerView: 3,
+                    1024: {
+                        slidesPerView: 3, // For desktop, show 3 slides
                     },
                 }}
-                className="posts-slider"
             >
-                {visiblePosts.slice(0, 6).map((post, index) => (
+                {visiblePosts.map((post, index) => (
                     <SwiperSlide key={index} className="transition-transform duration-300 transform scale-90 group zoom-in">
                         <div className="bg-white shadow-lg p-6 rounded-lg hover:shadow-2xl transition-all duration-300 transform scale-100 flex flex-col justify-between h-full">
-                            <img src={post.image} alt={post.title} className="w-full h-48 object-cover rounded-md mb-4" />
+                            <span className="text-sm font-semibold text-white bg-yellow-500 px-3 py-1 rounded-full self-start mb-3">
+                                {post.category.name}
+                            </span>
+                            {post.image && (
+                                <img src={post.image} alt={post.title} className="w-full h-48 object-cover rounded-md mb-4" />
+                            )}
                             <h2 className="text-xl font-semibold text-gray-800">{post.title}</h2>
                             <p className="text-sm text-gray-500">{post.date}</p>
                             <p className="text-gray-700 mt-2 flex-grow">{post.content}</p>
@@ -170,4 +161,4 @@ const BlogPage = () => {
     );
 };
 
-export default BlogPage;
+export default News;
