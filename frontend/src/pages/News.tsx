@@ -157,11 +157,11 @@ const BlogPage = () => {
             >
                 {visiblePosts.slice(0, 6).map((post, index) => (
                     <SwiperSlide key={index} className="transition-transform duration-300 transform scale-90 group zoom-in">
-                        <div className="bg-white shadow-lg p-6 rounded-lg hover:shadow-2xl transition-all duration-300 transform scale-100">
-                            <img src={post.image} alt={post.title} className="w-full h-48 object-cover rounded-md" />
-                            <h2 className="text-xl font-semibold mt-4 text-gray-800">{post.title}</h2>
+                        <div className="bg-white shadow-lg p-6 rounded-lg hover:shadow-2xl transition-all duration-300 transform scale-100 flex flex-col justify-between h-full">
+                            <img src={post.image} alt={post.title} className="w-full h-48 object-cover rounded-md mb-4" />
+                            <h2 className="text-xl font-semibold text-gray-800">{post.title}</h2>
                             <p className="text-sm text-gray-500">{post.date}</p>
-                            <p className="text-gray-700 mt-2">{post.content}</p>
+                            <p className="text-gray-700 mt-2 flex-grow">{post.content}</p>
                         </div>
                     </SwiperSlide>
                 ))}
