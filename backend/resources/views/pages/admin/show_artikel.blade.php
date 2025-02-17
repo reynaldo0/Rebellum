@@ -40,15 +40,15 @@
             <div class="space-y-4">
                 @foreach($article->comments as $comment)
                     <div class="p-2 border-t">
-                        <div class="flex items-start mb-2">
+                        <div class="flex items-start mb-2 gap-1">
                             <div
-                                class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-white font-bold">
+                                class="size-10 min-w-10 rounded-full bg-yellow-500 flex items-center justify-center text-white font-bold">
                                 {{ substr($comment->username, 0, 1) }}
                             </div>
                             <div class="ml-3">
                                 <h3 class="font-semibold text-gray-800">{{ $comment->username }}</h3>
                                 <p class="text-xs text-gray-500 leading-none">{{ $comment->created_at->diffForHumans() }}</p>
-                                <p class="text-gray-700">{{ $comment->content }}</p>
+                                <p class="text-gray-700 text-sm">{{ $comment->content }}</p>
                             </div>
                         </div>
                     </div>
