@@ -12,7 +12,7 @@
 - MySQL
 
 
-## 1. Backend
+## 1. Backend (dashboard)
 
 masuk ke folder "backend"
 
@@ -31,19 +31,14 @@ jalankan migration database
   php artisan migrate --seed
 ```
 
-Jalankan server di 2 terminal yang berbeda 
-
-terminal 1
+jalankan server
 ```bash
+  npm run build
   php artisan ser --port=8000
 ```
-terminal 2
-```bash
-  npm run dev
-```
 
 
-## 1. Frontend
+## 1. Frontend (landing page)
 
 masuk ke folder "frontend"
 
