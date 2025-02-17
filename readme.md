@@ -1,4 +1,17 @@
 
+# Langkah-langkah menjalankan Project
+
+
+
+
+## Persyaratan Sistem
+
+- PHP (>=8.3)
+- Composer
+- Node.js & npm
+- MySQL
+
+
 ## 1. Backend (dashboard)
 
 masuk ke folder "backend"
@@ -22,5 +35,24 @@ jalankan server
 ```bash
   npm run build
   php artisan ser --port=8000
+```
+
+
+## 1. Frontend (landing page)
+
+masuk ke folder "frontend"
+
+```bash
+  cd frontend
+```
+
+Install semua dependencies
+```bash
+  npm install
+```
+
+jalankan server
+```bash
+  npm run dev
 ```
 
