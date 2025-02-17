@@ -39,7 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/quiz', [UserQuizController::class, 'index'])->name('user.quiz.index');
     Route::get('/user/quiz/{categoryId}', [UserQuizController::class, 'show'])->name('user.quiz.show');
     Route::post('/user/quiz/submit', [UserQuizController::class, 'submit'])->name('user.quiz.submit');
-    Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
+    Route::post('/user/scores', [ScoreController::class, 'store'])->name('scores.store');
+    Route::get('/leaderboard', [AdminQuizController::class, 'leaderboard'])->name('admin.quiz.leaderboard');
 
     Route::resource('articles', ArticleController::class);
     Route::post('articles/{article}/like', [LikeController::class, 'likeArticle'])->name('articles.like');
@@ -75,8 +76,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/quiz/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
         Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('admin.categories.show');
         Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
-
-        Route::get('/leaderboard', [AdminQuizController::class, 'leaderboard'])->name('admin.quiz.leaderboard');
 
         Route::post('/quiz/categories/', [CategoryController::class, 'store'])->name('admin.categories.store');
 
