@@ -11,7 +11,7 @@ import Kasus from "./pages/Kasus";
 import Konsultasi from "./pages/Konsultasi";
 import Pengaruh from "./pages/Pengaruh";
 import Team from "./pages/Team";
-import Berita from "./pages/Berita";
+import NewsPage from "./pages/News";
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
               <Pengaruh />
               <Data />
               <Konsultasi />
-              <Berita/>
+              <NewsPage/>
               <Chat />
               <Dokumentasi />
               <Team />

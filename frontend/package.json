@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ionic/react": "^8.4.3",
     "@react-three/drei": "^9.121.4",
     "@react-three/fiber": "^8.17.14",
     "@reacticons/ionicons": "^7.1.0",
@@ -19,6 +20,7 @@
     "flowbite": "^3.1.2",
     "flowbite-react": "^0.10.2",
     "framer-motion": "^12.4.3",
+    "ionicons": "^7.4.0",
     "laravel-echo": "^2.0.0",
     "pusher-js": "^8.4.0",
     "react": "^18.3.1",
