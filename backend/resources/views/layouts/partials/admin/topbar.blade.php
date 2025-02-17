@@ -19,12 +19,12 @@
             </div>
             <div class="flex items-center">
                 <div class="flex items-center gap-2 ms-3">
-                    @include('components.darkmode-toggle-btn')
+                    {{-- @include('components.darkmode-toggle-btn') --}}
 
                     <div>
                         <button type="button"
                             class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                            aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                            aria-expanded="false" data-dropdown-toggle="dropdown-user" data-dropdown-offset-skidding="-40">
                             <span class="sr-only">Open user menu</span>
                             <img class="w-8 h-8 rounded-full object-cover border-2 border-gray-300 shadow-md"
                                 src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) . '?' . time() : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&color=7F9CF5&background=EBF4FF' }}"
@@ -44,19 +44,9 @@
                         </div>
                         <ul class="py-1" role="none">
                             <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Dashboard</a>
-                            </li>
-                            <li>
                                 <a href="{{ route('profile.edit') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Earnings</a>
+                                    role="menuitem">Profile</a>
                             </li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">

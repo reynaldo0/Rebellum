@@ -1,4 +1,4 @@
-<section class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+<section class="max-w-2xl mx-auto bg-white p-6 rounded-lg">
     <header>
         <h2 class="text-2xl font-semibold text-gray-900">
             {{ __('Profile Information') }}

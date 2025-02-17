@@ -3,20 +3,29 @@
 @section('title', 'Detail Artikel')
 
 @section('content')
-    <div class="bg-white rounded-lg shadow-md p-6 dark:bg-gray-800">
+    <div class="relative bg-white rounded-lg shadow-md p-6 dark:bg-gray-800">
+        <form action="{{ route('articles.like', $article->id) }}" method="post" class="absolute top-5 right-5 flex flex-col items-center">
+            @csrf
+            <button type="submit" class="text-red-500 text-5xl">
+                <i class="bx {{ $article->hasLikedByUser() ? 'bxs-heart' : 'bx-heart' }}"></i>
+            </button>
+            <p class="-mt-1 text-gray-900 text-sm">{{ $article->likes()->count() }} suka</p>
+        </form>
+
         <img class="max-w-full h-auto max-h-[300px] mb-4"
             src="{{ $article->image ? asset('storage/' . $article->image) : 'https://placehold.co/200' }}"
             alt="thumnail article">
 
         <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ $article->title }}</h1>
-        <p class="text-gray-500 dark:text-gray-400 mt-2">{{ $article->description }}</p>
+        <p class="text-gray-500 dark:text-gray-400 mt-2">{!!  $article->description  !!}</p>
+
         <p class="text-sm text-gray-400 mt-4">Dibuat oleh: {{ $article->user->name }} |
             {{ $article->created_at->format('d M Y') }}
         </p>
 
         <div class="my-4">
             <div class="flex justify-between items-center">
-                <h2 class="text-2xl font-bold mb-4">Comments</h2>
+                <h2 class="text-2xl font-bold mb-4">Komentar</h2>
                 <button data-modal-target="modal-create" data-modal-toggle="modal-create"
                     class="inline-block h-fit bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-2 rounded">
                     Tambah Komentar

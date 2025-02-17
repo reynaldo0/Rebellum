@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -15,12 +16,17 @@ class ArticleController extends Controller
     {
         $userRole = Auth::user()->role;
         if ($userRole == 'admin') {
-            $articles = Article::where('status', 'approved')->get();
-        }else {
+            $articles = Article::all();
+        } else {
             $articles = Article::where('user_id', Auth::user()->id)->get();
         }
 
         return view('pages.admin.artikel', compact('articles'));
+    }
+
+    public function create()
+    {
+        return view('pages.admin.create_artikel');
     }
 
     /**
@@ -42,15 +48,15 @@ class ArticleController extends Controller
         $validated['user_id'] = Auth::user()->id;
 
         // Jika user adalah admin, langsung "approved", jika tidak, "pending"
-        $validated['status'] = Auth::user()->is_admin ? 'approved' : 'pending';
+        $validated['status'] = Auth::user()->role == 'admin' ? 'approved' : 'pending';
 
         $article = Article::create($validated);
 
         if (!$article) {
-            return redirect()->back()->with('error', 'Artikel gagal ditambahkan');
+            return redirect()->route('articles.index')->with('error', 'Artikel gagal ditambahkan');
         }
 
-        return redirect()->back()->with('success', 'Artikel berhasil diajukan' . (Auth::user()->is_admin ? '' : ' dan menunggu persetujuan admin'));
+        return redirect()->route('articles.index')->with('success', 'Artikel berhasil dibuat' . (Auth::user()->role == 'admin' ? '' : ' dan menunggu persetujuan admin'));
     }
 
     /**
@@ -62,6 +68,11 @@ class ArticleController extends Controller
         return view('pages.admin.show_artikel', compact('article'));
     }
 
+    public function edit(Article $article)
+    {
+        return view('pages.admin.edit_artikel', compact('article'));
+    }
+
     /**
      * Update the specified resource in storage.
      */
@@ -70,15 +81,24 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
+            'image' => 'nullable'
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+
+            Storage::disk('public')->delete($article->image);
+
+            $validated['image'] = $image->store('articles', 'public');
+        }
 
         $update = $article->update($validated);
 
         if (!$update) {
-            return redirect()->back()->with('error', 'Artikel gagal diupdate');
+            return redirect()->route('articles.index')->with('error', 'Artikel gagal diupdate');
         }
 
-        return redirect()->back()->with('success', 'Artikel berhasil diupdate');
+        return redirect()->route('articles.index')->with('success', 'Artikel berhasil diupdate');
     }
 
     /**
@@ -87,12 +107,12 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         if (!$article) {
-            return redirect()->back()->with('error', 'Artikel tidak ditemukan');
+            return redirect()->route('articles.index')->with('error', 'Artikel tidak ditemukan');
         }
 
         $article->delete();
 
-        return redirect()->back()->with('success', 'Artikel berhasil dihapus');
+        return redirect()->route('articles.index')->with('success', 'Artikel berhasil dihapus');
     }
 
     public function approve($id)
