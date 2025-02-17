@@ -11,19 +11,8 @@ use Illuminate\Support\Facades\Auth;
 class ScoreController extends Controller
 {
     // ScoreController.php
-
     public function store(Request $request)
     {
-        // Cek apakah sudah ada percobaan sebelumnya pada user dan kategori quiz ini
-        $attempts = Score::where('user_id', Auth::id())
-            ->where('quiz_id', null) // Only count total attempts for this quiz attempt (set quiz_id to null for total score)
-            ->count();
-
-        // Batas maksimal percobaan
-        if ($attempts >= 3) {
-            return redirect()->back()->with('error', 'Anda sudah mencapai batas maksimal percobaan (3 kali).');
-        }
-
         $quizzes = Quiz::all();
         $totalScore = 0;
 

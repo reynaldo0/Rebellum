@@ -19,23 +19,32 @@
 
                     @if (session('score') == 0)
                         <h2 class="text-xl font-bold text-gray-800">🙁 Coba Lagi!</h2>
-                        <p class="mt-4 text-gray-600">Skor Anda: <span class="text-red-600 font-semibold">0</span> dari
-                            100</p>
+                        <p class="mt-4 text-gray-600">Skor Anda: <span class="text-red-600 font-semibold">0</span> dari 100
+                        </p>
                         <p class="text-sm text-gray-600">Sepertinya Anda belum berhasil. Ingin mencoba quiz lagi?</p>
                     @else
                         <h2 class="text-xl font-bold text-gray-800">🎉 Hasil Quiz</h2>
                         <p class="mt-4 text-gray-600">Skor Anda: <span
                                 class="text-blue-600 font-semibold">{{ session('score') }}</span> dari 100
                         </p>
-                        @if (session('score') >= 10 && session('score') <= 30)
-                            <p class="mt-2 text-red-600">Coba lagi! Anda bisa melakukannya lebih baik.</p>
-                        @elseif(session('score') > 30 && session('score') <= 50)
-                            <p class="mt-2 text-yellow-600">Sedikit lagi! Terus berlatih untuk skor yang lebih tinggi.</p>
-                        @elseif(session('score') > 50 && session('score') <= 70)
-                            <p class="mt-2 text-blue-600">Bagus! Anda hampir mencapai skor maksimal.</p>
-                        @elseif(session('score') > 70 && session('score') <= 100)
-                            <p class="mt-2 text-green-600">Hebat! Skor Anda sangat luar biasa!</p>
+                        @if (session('score') < 80)
+                            @if ($category->name == 'Geografi')
+                                <p class="mt-2 text-red-600">Geografi: Coba lagi! Anda bisa melakukannya lebih baik.</p>
+                            @elseif($category->name == 'Sejarah')
+                                <p class="mt-2 text-red-600">Sejarah: Coba lagi! Anda bisa melakukannya lebih baik.</p>
+                            @elseif($category->name == 'Matematika')
+                                <p class="mt-2 text-red-600">Matematika: Coba lagi! Anda bisa melakukannya lebih baik.</p>
+                            @endif
+                        @elseif(session('score') >= 80)
+                            @if ($category->name == 'Geografi')
+                                <p class="mt-2 text-green-600">Geografi: Hebat! Skor Anda sangat luar biasa!</p>
+                            @elseif($category->name == 'Sejarah')
+                                <p class="mt-2 text-green-600">Sejarah: Hebat! Skor Anda sangat luar biasa!</p>
+                            @elseif($category->name == 'Matematika')
+                                <p class="mt-2 text-green-600">Matematika: Hebat! Skor Anda sangat luar biasa!</p>
+                            @endif
                         @endif
+
                     @endif
 
                     {{-- Tombol Tindakan --}}
@@ -45,12 +54,23 @@
                                 class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
                                 Coba Lagi
                             </a>
+                        @elseif(session('score') < 70)
+                            <a href="{{ route('user.quiz.show', $category->id) }}"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                                Coba Lagi
+                            </a>
+                            <a href="{{ route('consultation.create') }}"
+                                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                                Konsultasi
+                            </a>
+                        @else
+                            <a href="{{ route('user.quiz.index') }}"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                                Kuis Lainnya
+                            </a>
                         @endif
-                        <a href="{{ route('user.quiz.index') }}"
-                            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                            Kuis Lainnya
-                        </a>
                     </div>
+
                 </div>
             </div>
 
