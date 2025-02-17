@@ -1,8 +1,22 @@
 @extends('layouts.admin')
 
-@section('title', 'Artikel')
+{{-- @section('title', 'Artikel') --}}
 
 @section('content')
+    <div class="flex justify-between items-center mb-5">
+        <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Artikel</h1>
+
+        <form id="filter" method="GET" class="col-span-2">
+            <select id="categories" name="category"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected value="">Kategori</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $category->id == request()->query('category') ? 'selected' : '' }}>{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </form>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         @foreach ($articles as $article)
             <a href="{{ route('articles.detail.show', $article->id) }}"
@@ -13,7 +27,8 @@
                             src="{{ $article->image ? asset('storage/' . $article->image) : 'https://placehold.co/200' }}"
                             alt="{{ $article->title }}">
 
-                        <small class="absolute top-2 right-2 px-2 py-1 text-xs bg-yellow-500 rounded shadow border border-yellow-600 text-white">
+                        <small
+                            class="absolute top-2 right-2 px-2 py-1 text-xs bg-yellow-500 rounded shadow border border-yellow-600 text-white">
                             {{ $article->category->name }}
                         </small>
                     </div>
@@ -50,4 +65,13 @@
             </a>
         @endforeach
     </div>
+
+    <script>
+        const filterForm = document.getElementById('filter');
+        const categories = document.getElementById('categories');
+
+        categories.onchange = () => {
+          filterForm.submit();
+        }
+    </script>
 @endsection

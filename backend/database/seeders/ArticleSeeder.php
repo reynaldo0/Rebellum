@@ -216,7 +216,7 @@ berbagai masalah kesehatan jangka panjang.',
                 'description' => 'Sebagai langkah baru dalam menangani kasus bullying, sebuah sekolah di Jakarta mulai menerapkan hukuman berupa program rehabilitasi mental bagi pelaku bullying, bukan hanya sanksi akademik. Program ini bertujuan untuk mencegah perilaku agresif di masa depan.',
                 'category_id' => Category::bullying->value,
                 'user_id' => 1,
-                'image' => 'articles/bully-5.jpg',
+                'image' => 'articles/bully-5.jpeg',
                 'status' => 'pending'
             ],
             [

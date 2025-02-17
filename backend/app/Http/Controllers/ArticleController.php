@@ -138,7 +138,7 @@ class ArticleController extends Controller
 
     public function history()
     {
-        $articles = Article::orderBy('created_at', 'desc')->get();
+        $articles = Article::orderByRaw("status = 'pending' DESC")->orderBy('created_at', 'desc')->get();
         return view('pages.admin.history_articles', compact('articles'));
     }
 
