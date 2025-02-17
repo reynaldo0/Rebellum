@@ -49,7 +49,30 @@ class UserQuizController extends Controller
             }
         }
 
-        // Pastikan JSON response dikirim dengan benar
-        return response()->json(['score' => $score]);
+        // Simpan skor dalam session
+        session(['score' => $score]);
+
+        // Redirect ke halaman hasil quiz
+        return redirect()->back();
+    }
+
+    public function store(Request $request)
+    {
+        $totalScore = 0;
+
+        // Loop through the quizzes and calculate the score
+        foreach ($request->answers as $quizId => $answer) {
+            $quiz = Quiz::find($quizId);
+
+            // Check if the answer matches the correct answer and add the quiz score to the total score
+            if ($quiz && $quiz->correct_answer === $answer) {
+                $totalScore += $quiz->score; // Add the score set by the admin
+            }
+        }
+
+        // Store the score in the session
+        session()->flash('score', $totalScore);
+
+        return redirect()->route('user.quiz.show', $quiz->category_id); // Redirect back to the quiz page
     }
 }

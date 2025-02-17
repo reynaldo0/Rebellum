@@ -7,6 +7,31 @@ use Illuminate\Http\Request;
 
 class ConsultationController extends Controller
 {
+    public function create()
+    {
+        return view('pages.user.consultation'); // Make sure you have a 'consultation.blade.php' file
+    }
+
+    public function dashboard(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string',
+        ]);
+
+        // Store the data in the database
+        Consultation::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'message' => $validated['message'],
+        ]);
+
+        // Redirect back to the form with a success message
+        return redirect()->route('consultation.create')->with('success', 'Consultation sent successfully');
+    }
+
+
     public function store(Request $request)
     {
         $validated = $request->validate([

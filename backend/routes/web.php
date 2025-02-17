@@ -40,7 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/quiz', [UserQuizController::class, 'index'])->name('user.quiz.index');
     Route::get('/user/quiz/{categoryId}', [UserQuizController::class, 'show'])->name('user.quiz.show');
     Route::post('/user/quiz/submit', [UserQuizController::class, 'submit'])->name('user.quiz.submit');
-    Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
+    Route::post('/user/scores', [ScoreController::class, 'store'])->name('scores.store');
+    Route::get('/leaderboard', [AdminQuizController::class, 'leaderboard'])->name('admin.quiz.leaderboard');
 
     Route::resource('articles', ArticleController::class);
     Route::resource('category-article', ArticleCategoryController::class);
@@ -52,6 +53,12 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/articles-submissions', [ArticleController::class, 'submissions'])->name('articles.submissions');
+
+    Route::get('/consultation', [ConsultationController::class, 'create'])->name('consultation.create');
+
+    // Route for submitting the consultation form (POST request)
+    Route::post('/consultation', [ConsultationController::class, 'dashboard'])->name('consultation.store');
+
 
     Route::middleware(['auth', AdminMiddleware::class])->group(function () {
         // Manage Users
@@ -78,11 +85,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('admin.categories.show');
         Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
 
-        Route::get('/leaderboard', [AdminQuizController::class, 'leaderboard'])->name('admin.quiz.leaderboard');
-
         Route::post('/quiz/categories/', [CategoryController::class, 'store'])->name('admin.categories.store');
 
-        Route::get('/consultations', [ConsultationController::class, 'consultations'])->name('admin.consultations');
+        Route::get('/admin/consultations', [ConsultationController::class, 'consultations'])->name('admin.consultations');
     });
 });
 

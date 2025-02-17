@@ -10,24 +10,44 @@ use Illuminate\Support\Facades\Auth;
 
 class ScoreController extends Controller
 {
+    // ScoreController.php
     public function store(Request $request)
     {
         $quizzes = Quiz::all();
-        $score = 0;
+        $totalScore = 0;
 
+        // Hitung skor berdasarkan jawaban yang benar
         foreach ($quizzes as $quiz) {
-            if ($request->input("answers.{$quiz->id}") === $quiz->correct_answer) {
-                $score++;
+            // Ambil jawaban user untuk masing-masing quiz
+            $userAnswer = $request->input("answers.{$quiz->id}");
+
+            // Cek jika jawaban benar
+            if ($userAnswer === $quiz->correct_answer) {
+                $totalScore += $quiz->score; // Tambah score jika jawaban benar
             }
 
+            // Menyimpan skor per quiz ke dalam Score table jika jawabannya benar
             Score::create([
                 'user_id' => Auth::id(),
-                'quiz_id' => $quiz->id, // Simpan quiz_id
-                'score' => $score
+                'quiz_id' => $quiz->id,
+                'score' => ($userAnswer === $quiz->correct_answer) ? $quiz->score : 0, // Simpan skor hanya jika benar
             ]);
         }
 
-        return redirect()->back()->with('score', $score);
+        // Jika total skor lebih dari atau sama dengan 100, setel skor maksimal menjadi 100
+        if ($totalScore >= 100) {
+            $totalScore = 100;
+        }
+
+        // Menyimpan total skor pada user dan quiz
+        Score::create([
+            'user_id' => Auth::id(),
+            'quiz_id' => null, // Tidak ada quiz_id untuk total score
+            'score' => $totalScore
+        ]);
+
+        // Mengarahkan ke halaman hasil dengan skor
+        return redirect()->back()->with('score', $totalScore);
     }
 
     public function indexAdmin(Request $request)
