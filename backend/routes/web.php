@@ -26,7 +26,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('articles', ArticleController::class)->only('show');
 Route::resource('chat', ChatController::class);
 Route::post('/comment/{id}', [CommentController::class, 'store'])->name('comment.store');
 
@@ -41,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/quiz/submit', [UserQuizController::class, 'submit'])->name('user.quiz.submit');
     Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
 
-    Route::resource('articles', ArticleController::class)->except('show');
+    Route::resource('articles', ArticleController::class);
     Route::post('articles/{article}/like', [LikeController::class, 'likeArticle'])->name('articles.like');
 
     Route::prefix('articles-detail')->group(function () {
@@ -82,5 +81,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/quiz/categories/', [CategoryController::class, 'store'])->name('admin.categories.store');
     });
 });
+
+
 
 require __DIR__ . '/auth.php';

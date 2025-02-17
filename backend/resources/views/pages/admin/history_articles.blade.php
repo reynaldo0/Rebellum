@@ -98,21 +98,32 @@
                         </td>
                         <td class="px-6 py-4 flex justify-center gap-2">
                             @if ($article->status === 'pending')
+                                <a href="{{ route('articles.detail.show', $article->id) }}"
+                                    class="bg-yellow-500 text-white px-4 py-1 rounded hover:bg-yellow-600">
+                                    <i class='bx bx-show'></i>
+                                </a>
+
                                 <form action="{{ route('articles.approve', $article->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit"
-                                        class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">Setujui</button>
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">
+                                        <i class='bx bx-check'></i>
+                                    </button>
                                 </form>
 
                                 <form action="{{ route('articles.reject', $article->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit"
-                                        class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">Tolak</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">
+                                        <i class='bx bx-x'></i>
+                                    </button>
                                 </form>
                             @else
-                                <button class="bg-gray-400 text-white px-4 py-1 rounded cursor-not-allowed w-full">Selesai</button>
+                            <a href="{{ route('articles.detail.show', $article->id) }}"
+                                class="bg-yellow-500 text-white px-4 py-1 rounded hover:bg-yellow-600">
+                                <i class='bx bx-show'></i>
+                            </a>
+                                {{-- <button class="bg-gray-400 text-white px-4 py-1 rounded cursor-not-allowed w-full">Selesai</button> --}}
                             @endif
                         </td>
                     </tr>
