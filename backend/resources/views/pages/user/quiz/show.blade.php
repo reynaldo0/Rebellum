@@ -20,12 +20,12 @@
                     @if (session('score') == 0)
                         <h2 class="text-xl font-bold text-gray-800">🙁 Coba Lagi!</h2>
                         <p class="mt-4 text-gray-600">Skor Anda: <span class="text-red-600 font-semibold">0</span> dari
-                            {{ count($quizzes) }}</p>
+                            100</p>
                         <p class="text-sm text-gray-600">Sepertinya Anda belum berhasil. Ingin mencoba quiz lagi?</p>
                     @else
                         <h2 class="text-xl font-bold text-gray-800">🎉 Hasil Quiz</h2>
                         <p class="mt-4 text-gray-600">Skor Anda: <span
-                                class="text-blue-600 font-semibold">{{ session('score') }}</span> dari {{ count($quizzes) }}
+                                class="text-blue-600 font-semibold">{{ session('score') }}</span> dari 100
                         </p>
                     @endif
 
