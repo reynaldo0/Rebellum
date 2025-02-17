@@ -24,7 +24,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.5",
     "socket.io-client": "^4.8.1",
-    "swiper": "^11.1.4",
+    "swiper": "^11.2.4",
     "three": "^0.173.0",
     "typed.js": "^2.1.0"
   },
