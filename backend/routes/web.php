@@ -75,14 +75,13 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/quiz/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
         Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('admin.categories.show');
-        Route::get('/quiz/create/{category_id}', [AdminQuizController::class, 'create'])->name('admin.quiz.create');
         Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
 
         Route::get('/leaderboard', [AdminQuizController::class, 'leaderboard'])->name('admin.quiz.leaderboard');
 
         Route::post('/quiz/categories/', [CategoryController::class, 'store'])->name('admin.categories.store');
 
-        Route::get('/consultations', [ConsultationController::class, 'consultations']);
+        Route::get('/consultations', [ConsultationController::class, 'consultations'])->name('admin.consultations');
     });
 });
 

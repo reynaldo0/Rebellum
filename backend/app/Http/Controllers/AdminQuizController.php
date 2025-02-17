@@ -102,7 +102,7 @@ class AdminQuizController extends Controller
     {
         $quiz = Quiz::findOrFail($id);
         $quiz->delete();
-        return redirect()->route('admin.quiz.index')->with('success', 'Quiz berhasil dihapus!');
+        return redirect()->route('pages.admin.quiz.index')->with('success', 'Quiz berhasil dihapus!');
     }
 
     public function startQuiz($category_id)
