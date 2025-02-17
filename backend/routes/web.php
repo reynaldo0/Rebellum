@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminQuizController;
+use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ArticleDetailController;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
 
     Route::resource('articles', ArticleController::class);
+    Route::resource('category-article', ArticleCategoryController::class);
     Route::post('articles/{article}/like', [LikeController::class, 'likeArticle'])->name('articles.like');
 
     Route::prefix('articles-detail')->group(function () {

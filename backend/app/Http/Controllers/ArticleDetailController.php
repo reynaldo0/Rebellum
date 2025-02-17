@@ -9,7 +9,7 @@ class ArticleDetailController extends Controller
 {
     public function index()
     {
-        $articles = Article::where('status', 'approved')->latest()->paginate(6);
+        $articles = Article::where('status', 'approved')->latest()->get();
 
         return view('pages.admin.detail_artikel', compact('articles'));
     }

@@ -14,9 +14,12 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::insert([
-            ['name' => 'Geografi', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Sejarah', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Matematika', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Kesadaran Sosial', 'created_at' => now(), 'updated_at' => now()],
+            // ['name' => 'Kesehatan Mental', 'created_at' => now(), 'updated_at' => now()],
+            // ['name' => 'Kepribadian dan Minat', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Pemecahan Masalah', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Hubungan Sehat', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Digital Awareness', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }

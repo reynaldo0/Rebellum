@@ -18,6 +18,7 @@ class Article extends Model
         'user_id',
         'image',
         'status',
+        'category_id'
     ];
 
     public function user()
@@ -28,6 +29,11 @@ class Article extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(ArticleCategory::class, 'category_id', 'id');
     }
 
     public function likes()

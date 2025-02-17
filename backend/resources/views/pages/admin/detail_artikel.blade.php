@@ -8,10 +8,14 @@
             <a href="{{ route('articles.detail.show', $article->id) }}"
                 class="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800 hover:shadow-xl transition-all">
                 <div class="p-4">
-                    <div class="w-full h-[200px] overflow-hidden">
+                    <div class="w-full h-[200px] overflow-hidden relative">
                         <img class="w-full h-full object-cover"
                             src="{{ $article->image ? asset('storage/' . $article->image) : 'https://placehold.co/200' }}"
                             alt="{{ $article->title }}">
+
+                        <small class="absolute top-2 right-2 px-2 py-1 text-xs bg-yellow-500 rounded shadow border border-yellow-600 text-white">
+                            {{ $article->category->name }}
+                        </small>
                     </div>
 
                     <div class="flex flex-col justify-between h-full">
@@ -19,6 +23,7 @@
                             <h3 class="text-lg mt-1 font-semibold text-gray-900 dark:text-white">
                                 {{ $article->title }}
                             </h3>
+
                             <p class="text-sm text-gray-500 dark:text-gray-400">
                                 {{ Str::limit(strip_tags($article->description), 100, '...') }}
                             </p>
