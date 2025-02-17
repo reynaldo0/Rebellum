@@ -8,6 +8,7 @@ use App\Http\Controllers\ArticleDetailController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScoreController;
@@ -41,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/quiz/{categoryId}', [UserQuizController::class, 'show'])->name('user.quiz.show');
     Route::post('/user/quiz/submit', [UserQuizController::class, 'submit'])->name('user.quiz.submit');
     Route::post('/user/scores', [ScoreController::class, 'store'])->name('scores.store');
-    Route::get('/leaderboard', [AdminQuizController::class, 'leaderboard'])->name('admin.quiz.leaderboard');
+    Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('admin.quiz.leaderboard');
 
     Route::resource('articles', ArticleController::class);
     Route::resource('category-article', ArticleCategoryController::class);
