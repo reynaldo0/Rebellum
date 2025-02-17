@@ -17,6 +17,11 @@
             alt="thumnail article">
 
         <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ $article->title }}</h1>
+
+        <small class="px-2 py-1 text-xs bg-yellow-500 rounded shadow border text-white">
+            {{ $article->category->name }}
+        </small>
+
         <p class="text-gray-500 dark:text-gray-400 mt-2">{!!  $article->description  !!}</p>
 
         <p class="text-sm text-gray-400 mt-4">Dibuat oleh: {{ $article->user->name }} |

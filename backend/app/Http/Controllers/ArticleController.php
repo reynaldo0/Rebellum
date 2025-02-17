@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,8 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return view('pages.admin.create_artikel');
+        $categories = ArticleCategory::all();
+        return view('pages.admin.create_artikel', compact('categories'));
     }
 
     /**
@@ -38,6 +40,7 @@ class ArticleController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
+            'category_id' => 'required|exists:article_categories,id'
         ]);
 
         if ($request->hasFile('image')) {
@@ -70,7 +73,8 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        return view('pages.admin.edit_artikel', compact('article'));
+        $categories = ArticleCategory::all();
+        return view('pages.admin.edit_artikel', compact('article', 'categories'));
     }
 
     /**
@@ -81,7 +85,8 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
-            'image' => 'nullable'
+            'image' => 'nullable',
+            'category_id' => 'required|exists:article_categories,id'
         ]);
 
         if ($request->hasFile('image')) {
@@ -133,7 +138,7 @@ class ArticleController extends Controller
 
     public function history()
     {
-        $articles = Article::orderBy('created_at', 'desc')->get();
+        $articles = Article::orderByRaw("status = 'pending' DESC")->orderBy('created_at', 'desc')->get();
         return view('pages.admin.history_articles', compact('articles'));
     }
 

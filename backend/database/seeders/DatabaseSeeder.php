@@ -13,19 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(QuizSeeder::class);
-        $this->call(CategorySeeder::class);
-
-        User::factory()->create([
-            'name' => 'user',
-            'email' => 'user@gmail.com',
-            'role' => 'user'
-        ]);
-
-        User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'role' => 'admin'
+        $this->call([
+            UserSeeder::class,
+            ArticleCategorySeeder::class,
+            ArticleSeeder::class,
+            CategorySeeder::class,
+            QuizSeeder::class
         ]);
     }
 }
