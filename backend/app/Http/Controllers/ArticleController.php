@@ -37,8 +37,6 @@ class ArticleController extends Controller
         return response()->json($articles);
     }
 
-
-
     public function create()
     {
         $categories = ArticleCategory::all();

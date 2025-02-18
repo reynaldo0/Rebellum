@@ -18,7 +18,7 @@ class Article extends Model
         'user_id',
         'image',
         'status',
-        'category_id'
+        'category_id',
     ];
 
     public function user()

@@ -49,12 +49,13 @@ const Home = () => {
                             Indonesia diperkirakan mencapai sekitar 50%.
                         </p>
                         <button
-                            className="learn-more relative inline-block h-auto w-48 cursor-pointer border-none bg-transparent align-middle font-radioCasnada text-inherit outline-none"
-                            onClick={() => (window.location.href = "#temuanUmum")}>
+                            className="learn-more relative inline-block h-auto w-[300px] md:w-[450px] cursor-pointer border-none bg-transparent align-middle font-radioCasnada text-inherit outline-none"
+                            onClick={() => (window.location.href = "http://127.0.0.1:8000/")}>
                             <span className="circle" aria-hidden="true">
                                 <span className="icon arrow"></span>
                             </span>
-                            <span className="button-text translate-x-2">Selengkapnya</span>
+                            <span className="button-text hidden md:block translate-x-2">Periksa Dirimu & Cegah Kenakalan Remaja!</span>
+                            <span className="button-text text-sm -translate-y-2 md:hidden translate-x-2">Periksa Dirimu & Cegah Kenakalan Remaja!</span>
                         </button>
                     </div>
                     <div className="relative flex md:w-1/2 h-full items-center justify-center -ml-4 md:px-4">

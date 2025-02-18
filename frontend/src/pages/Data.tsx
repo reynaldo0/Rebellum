@@ -80,16 +80,16 @@ export const Data = () => {
     }, []);
 
     return (
-        <section id="data" className="pb-[600px] md:pb-[1000px]">
+        <section id="data" className="pb-[600px] md:pb-[900px]">
             <City />
             <div
                 id="data-children"
                 className="z-20 -mt-20 h-96 w-full rounded-t-3xl bg-white pt-10 md:-mt-28 md:rounded-t-[126px]">
                 <div id="data-inner" className="container">
-                    <h1 className="mb-10 text-center font-poppins text-3xl font-bold md:text-4xl">
+                    <h1 className="mb-10 text-center font-poppins text-3xl font-bold md:text-4xl" data-aos="fade-up" data-aos-duration="500">
                         Kumpulan Data <span className="text-yellow">Kenakalan Remaja </span>
                     </h1>
-                    <p className="mx-auto max-w-3xl text-center text-sm text-secondary-200 md:text-base">
+                    <p className="mx-auto max-w-3xl text-center text-sm text-secondary-200 md:text-base" data-aos="fade-up" data-aos-duration="700">
                         Dengan data kenakalan remaja kita dapat mencerminkan perilaku
                         negatif seseorang, seperti remaja yang menggunakan narkoba, tawuran,
                         merokok, dan kenakalan remaja lainnya. Dengan demikian kita dapat
@@ -99,15 +99,14 @@ export const Data = () => {
 
                     <div
                         id="button-container"
-                        className="mt-10 grid grid-cols-2 grid-rows-3 flex-wrap items-center justify-center gap-5 md:flex">
+                        className="mt-10 grid grid-cols-2 grid-rows-3 flex-wrap items-center justify-center gap-5 md:flex" data-aos="fade-up" data-aos-duration="700">
                         {dataButtonList.map((button, index) => (
                             <button
                                 key={index}
                                 ref={(e) => {
                                     if (e) buttonRefs.current[index] = e;
-                                }}                                
-                                data-aos="fade-in"
-                                data-aos-duration={300}
+                                }}
+
                                 className="flex w-full max-w-xs cursor-pointer gap-2 rounded-xl bg-[#6874B9] p-3 transition hover:-translate-y-1 hover:bg-yellow hover:opacity-90 md:w-fit">
                                 <div className="flex h-[48px] w-[80px] items-center justify-center rounded-lg bg-white text-black md:h-[96px] md:w-[96px]">
                                     <img src={button.image} className="h-auto w-full" alt="" />
@@ -126,7 +125,7 @@ export const Data = () => {
                     <h1
                         data-aos="fade-right"
                         data-aos-offset="200"
-                        className="my-10 font-poppins text-2xl font-bold md:ml-20">
+                        className="my-10 font-poppins text-2xl font-bold md:ml-20" >
                         Persentase Data dalam{" "}
                         <span className="text-yellow">Bentuk Grafik</span>
                     </h1>

@@ -12,11 +12,13 @@ import Konsultasi from "./pages/Konsultasi";
 import Pengaruh from "./pages/Pengaruh";
 import Team from "./pages/Team";
 import NewsPage from "./pages/News";
+import ToUp from "./components/ToUp";
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
+      <ToUp/>
       <Routes>
         <Route
           path="/"

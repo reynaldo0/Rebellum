@@ -16,7 +16,7 @@ const News = () => {
     const [visiblePosts, setVisiblePosts] = useState<Post[]>([]);
     const [categories, setCategories] = useState<string[]>([]);
     const [activeCategory, setActiveCategory] = useState<string | undefined>(undefined);
-    
+
     // Create a reference to the Swiper instances for categories and posts
     const categorySwiperRef = useRef<any>(null);
 
@@ -40,9 +40,12 @@ const News = () => {
                     throw new Error("Failed to fetch data");
                 }
                 const postData: Post[] = await postResponse.json();
+
+                // Filter out posts without an image
                 const filteredPosts = postData.filter(post => post.image && post.image.trim() !== "");
                 setPosts(filteredPosts);
                 setVisiblePosts(filteredPosts);
+
                 const uniqueCategories = Array.from(new Set(filteredPosts.map(post => post.category.name)));
                 setCategories(uniqueCategories);
             } catch (error) {
@@ -64,9 +67,16 @@ const News = () => {
 
     return (
         <div className="container mx-auto px-6 py-16 md:py-24">
-            <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800">
-                Artikel Tentang <span className="text-yellow">Kenakalan Remaja</span>
+            <h1 className="text-3xl md:text-4xl font-bold text-center mb-2 text-gray-800" data-aos="fade-up"
+                data-aos-duration="500">
+                Berita Kenakalan<span className="text-yellow"> Remaja Terkini
+                </span>
             </h1>
+            <p
+                data-aos="fade-up" data-aos-duration="700"
+                className="mx-auto mb-8 text-center text-sm text-secondary-200 md:max-w-2xl md:text-base">
+                Halaman ini menyajikan informasi terkini mengenai kenakalan remaja dari berbagai kategori untuk meningkatkan kesadaran dan pemahaman.
+            </p>
 
             {/* Category Slider on Mobile, Static on Desktop */}
             <div className="mb-8">
@@ -134,7 +144,6 @@ const News = () => {
                 breakpoints={{
                     640: {
                         slidesPerView: 1, // For mobile, show 1 slide
-                        
                     },
                     1024: {
                         slidesPerView: 3, // For desktop, show 3 slides

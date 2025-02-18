@@ -91,10 +91,10 @@ const Chat = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary-100 flex items-center justify-center px-4 py-10">
+    <div className="min-h-screen flex items-center justify-center px-4 py-10">
       
-      <div className="bg-gray-100 shadow-lg rounded-xl p-6 w-full max-w-2xl">
-        <h1 className="text-center text-4xl font-extrabold text-black mb-4">Forum Diskusi</h1>
+      <div className="bg-gray-200 shadow-lg rounded-xl p-6 w-full max-w-2xl">
+        <h1 className="text-center text-4xl font-extrabold text-black mb-4">Berikan Tanggapan Anda</h1>
         <p className="text-center text-lg text-black mb-6">Diskusi seputar kenakalan remaja</p>
 
         {/* Chat Box */}
@@ -113,7 +113,7 @@ const Chat = () => {
                 className="mb-4"
               >
                 <div className="flex justify-between">
-                  <strong className="text-primary-100">{msg.username}</strong>
+                  <strong className="text-yellow">{msg.username}</strong>
                   <span className="text-sm text-gray-500">{formatDate(msg.created_at)}</span>
                 </div>
                 <p className="bg-gray-50 shadow-sm p-3 rounded-lg mt-1 text-gray-700 break-words whitespace-pre-wrap">
@@ -135,7 +135,7 @@ const Chat = () => {
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-all"
+            className="bg-yellow text-white py-3 px-6 rounded-lg font-semibold hover:bg-yellow/90 transition-all"
           >
             Kirim
           </button>

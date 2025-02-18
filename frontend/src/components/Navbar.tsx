@@ -98,7 +98,7 @@ const Navbar = () => {
                 <a
                   href="http://127.0.0.1:8000/"
                   className="block rounded rounded-l-full rounded-r-full bg-primary-100 px-5 py-2 text-white transition-colors hover:bg-primary-200">
-                  Register
+                  Daftar dan Akses
                 </a>
               </li>
             </ul>

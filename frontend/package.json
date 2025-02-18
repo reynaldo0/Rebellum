@@ -15,6 +15,7 @@
     "@react-three/fiber": "^8.17.14",
     "@reacticons/ionicons": "^7.1.0",
     "@types/three": "^0.173.0",
+    "aos": "^2.3.4",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "flowbite": "^3.1.2",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
+    "@types/aos": "^3.0.7",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@types/swiper": "^6.0.0",
