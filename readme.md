@@ -31,6 +31,11 @@ jalankan migration database
   php artisan migrate --seed
 ```
 
+buat symlink ke folder public
+```bash
+  php artisan storage:link
+```
+
 jalankan server
 ```bash
   npm run build
