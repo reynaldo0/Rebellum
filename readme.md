@@ -6,7 +6,7 @@
 
 ## Persyaratan Sistem
 
-- PHP (>=8.3)
+- PHP (>=8.2)
 - Composer
 - Node.js & npm
 - MySQL
@@ -29,6 +29,11 @@ Install semua dependencies
 jalankan migration database
 ```bash
   php artisan migrate --seed
+```
+
+buat symlink ke folder public
+```bash
+  php artisan storage:link
 ```
 
 jalankan server

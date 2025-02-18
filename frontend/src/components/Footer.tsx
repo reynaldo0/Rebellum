@@ -93,9 +93,9 @@ export const Footer = () => {
                                 </li>
                                 <li className="mb-4">
                                     <a
-                                        href="https://www.haibunda.com/"
+                                        href="https://www.okezone.com/"
                                         className="lowercase hover:underline">
-                                        haibunda.com
+                                        okezone.com
                                     </a>
                                 </li>
                             </ul>
