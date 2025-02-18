@@ -6,7 +6,7 @@
 
 ## Persyaratan Sistem
 
-- PHP (>=8.3)
+- PHP (>=8.2)
 - Composer
 - Node.js & npm
 - MySQL
