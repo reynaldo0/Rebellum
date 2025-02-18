@@ -57,8 +57,12 @@ const Chat = () => {
     if (message.trim() === "") return;
 
     try {
-      const newMessage = { username: "Anonim", message, created_at: new Date().toISOString() };
-      setMessages((prev) => [...prev, newMessage]);
+      // const newMessage = {
+      //   username: "Anonim",
+      //   message,
+      //   created_at: new Date().toISOString(),
+      // };
+      // setMessages((prev) => [...prev, newMessage]);
 
       setMessage(""); // Reset input
       handleScroll();
@@ -72,7 +76,8 @@ const Chat = () => {
   const handleScroll = () => {
     setTimeout(() => {
       if (chatContainerRef.current) {
-        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        chatContainerRef.current.scrollTop =
+          chatContainerRef.current.scrollHeight;
       }
     }, 100);
   };
@@ -92,16 +97,18 @@ const Chat = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-10">
-      
       <div className="bg-gray-200 shadow-lg rounded-xl p-6 w-full max-w-2xl">
-        <h1 className="text-center text-4xl font-extrabold text-black mb-4">Berikan Tanggapan Anda</h1>
-        <p className="text-center text-lg text-black mb-6">Diskusi seputar kenakalan remaja</p>
+        <h1 className="text-center text-4xl font-extrabold text-black mb-4">
+          Berikan Tanggapan Anda
+        </h1>
+        <p className="text-center text-lg text-black mb-6">
+          Diskusi seputar kenakalan remaja
+        </p>
 
         {/* Chat Box */}
         <div
           ref={chatContainerRef}
-          className="h-80 overflow-y-auto border border-gray-300 rounded-lg p-4 bg-white shadow-md"
-        >
+          className="h-80 overflow-y-auto border border-gray-300 rounded-lg p-4 bg-white shadow-md">
           <AnimatePresence>
             {messages.map((msg, index) => (
               <motion.div
@@ -110,11 +117,12 @@ const Chat = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="mb-4"
-              >
+                className="mb-4">
                 <div className="flex justify-between">
-                  <strong className="text-yellow">{msg.username}</strong>
-                  <span className="text-sm text-gray-500">{formatDate(msg.created_at)}</span>
+                  <strong className="text-yellow">Anonim</strong>
+                  <span className="text-sm text-gray-500">
+                    {formatDate(msg.created_at)}
+                  </span>
                 </div>
                 <p className="bg-gray-50 shadow-sm p-3 rounded-lg mt-1 text-gray-700 break-words whitespace-pre-wrap">
                   {msg.message}
@@ -135,8 +143,7 @@ const Chat = () => {
           />
           <button
             type="submit"
-            className="bg-yellow text-white py-3 px-6 rounded-lg font-semibold hover:bg-yellow/90 transition-all"
-          >
+            className="bg-yellow text-white py-3 px-6 rounded-lg font-semibold hover:bg-yellow/90 transition-all">
             Kirim
           </button>
         </form>
