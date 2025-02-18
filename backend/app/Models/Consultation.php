@@ -13,6 +13,9 @@ class Consultation extends Model
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'location',
         'message',
+        'forms', 
     ];
 }
