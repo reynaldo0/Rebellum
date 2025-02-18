@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web([
             \App\Http\Middleware\CountRequestedArticle::class,
             \App\Http\Middleware\ConsultationCountMiddleware::class,
+            \App\Http\Middleware\ConsultationDetailCountMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

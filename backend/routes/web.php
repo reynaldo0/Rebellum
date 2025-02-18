@@ -8,6 +8,7 @@ use App\Http\Controllers\ArticleDetailController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\ConsultationDetailController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserQuizController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Models\ConsultationDetail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -58,8 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/consultation', [ConsultationController::class, 'create'])->name('consultation.create');
 
     // Route for submitting the consultation form (POST request)
-    Route::post('/consultation', [ConsultationController::class, 'dashboard'])->name('consultation.store');
-
+    Route::get('/consultation', [ConsultationDetailController::class, 'user'])->name('consultation.create');
+    Route::post('/consultation', [ConsultationDetailController::class, 'store'])->name('consultation.store');
 
     Route::middleware(['auth', AdminMiddleware::class])->group(function () {
         // Manage Users
@@ -89,6 +91,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/quiz/categories/', [CategoryController::class, 'store'])->name('admin.categories.store');
 
         Route::get('/admin/consultations', [ConsultationController::class, 'consultations'])->name('admin.consultations');
+        Route::get('/admin/consultations-detail', [ConsultationDetailController::class, 'index'])->name('admin.consultations-detail');
     });
 });
 

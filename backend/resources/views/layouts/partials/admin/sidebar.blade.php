@@ -58,7 +58,7 @@
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <i
                             class='bx bx-trophy text-2xl text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'></i>
-                        <span class="ms-3">Leaderboard</span>
+                        <span class="ms-3">Peringkat</span>
                     </a>
                 </li>
                 <li>
@@ -155,24 +155,50 @@
                         </li>
                         <li>
                             <a href="{{ route('admin.quiz.leaderboard') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Leaderboard</a>
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Peringkat</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ route('admin.consultations') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg class="bx bx-message w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M19 4c1.104 0 2 .896 2 2v12c0 1.104-.896 2-2 2H5c-1.104 0-2-.896-2-2V6c0-1.104.896-2 2-2h14zm0 14V6H5v12h14zm-2-7H7v-2h10v2z" />
+                    <button type="button"
+                        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        aria-controls="dropdown-konsultasi" data-collapse-toggle="dropdown-konsultasi">
+
+                        <i
+                            class='bx bx-task text-2xl text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'></i>
+
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Konsultasi</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 4 4 4-4" />
                         </svg>
-
-
-                        <span class="flex-1 ms-3 whitespace-nowrap">Konsultasi</span>
-                        <span
-                            class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ $consultationsCount }}</span>
-                    </a>
+                    </button>
+                    <ul id="dropdown-konsultasi" class="hidden py-2 space-y-2">
+                        <!-- Konsultasi Biasa -->
+                        <li>
+                            <a href="{{ route('admin.consultations') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                Biasa
+                                <!-- Badge for konsultasi count -->
+                                <span
+                                    class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                                    {{ $consultationsCount }}
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.consultations-detail') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                Detail
+                                <!-- Badge for konsultasi count -->
+                                <span
+                                    class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                                    {{ $consultationsDetailCount }}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             @endif
         </ul>
