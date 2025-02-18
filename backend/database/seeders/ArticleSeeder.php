@@ -224,7 +224,7 @@ berbagai masalah kesehatan jangka panjang.',
                 'description' => 'Para ahli menyarankan orang tua untuk lebih memperhatikan perubahan perilaku anak, seperti penurunan prestasi akademik, menarik diri dari lingkungan sosial, atau sering sakit tanpa alasan yang jelas, karena bisa jadi itu tanda mereka menjadi korban bullying.',
                 'category_id' => Category::bullying->value,
                 'user_id' => 1,
-                'image' => 'articles/bully-6.jpg',
+                'image' => 'articles/bully-6.jpeg',
                 'status' => 'pending'
             ],
         ];
