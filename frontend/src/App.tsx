@@ -12,13 +12,17 @@ import Konsultasi from "./pages/Konsultasi";
 import Pengaruh from "./pages/Pengaruh";
 import Team from "./pages/Team";
 import NewsPage from "./pages/News";
-import ToUp from "./components/ToUp";
+import ChatbotModal from "./pages/ChatBot";
+import { useState } from "react";
+import FloatingButton from "./components/FloatingButton";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <BrowserRouter>
       <Navbar />
-      <ToUp/>
+      <FloatingButton setIsOpen={setIsOpen} />
+      <ChatbotModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <Routes>
         <Route
           path="/"
@@ -30,7 +34,7 @@ function App() {
               <Pengaruh />
               <Data />
               <Konsultasi />
-              <NewsPage/>
+              <NewsPage />
               <Chat />
               <Dokumentasi />
               <Team />
