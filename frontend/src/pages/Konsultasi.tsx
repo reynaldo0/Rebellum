@@ -9,6 +9,7 @@ const Konsultasi = () => {
   const [location, setLocation] = useState(""); // New field for location
   const [message, setMessage] = useState("");
   const [forms, setForms] = useState<File | null>(null); // Updated field for file upload (forms)
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -25,7 +26,7 @@ const Konsultasi = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/consultations", formData, {
+      const response = await axios.post(`${API_BASE_URL}/consultations`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -46,7 +47,7 @@ const Konsultasi = () => {
           },
         }).then((result) => {
           if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
-            window.location.href = "http://127.0.0.1:8000/"; // Redirect to another page
+            window.location.href = "http://rebellum.karyasmkn46.info"; // Redirect to another page
           }
         });
 

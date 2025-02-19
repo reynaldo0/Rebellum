@@ -9,7 +9,7 @@ interface MessagesType {
   created_at: string;
 }
 
-axios.defaults.baseURL = "http://127.0.0.1:8000/api";
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Chat = () => {
   const [messages, setMessages] = useState<MessagesType[]>([]);
@@ -58,13 +58,13 @@ const Chat = () => {
     e.preventDefault();
     if (message.trim() === "") return;
 
-    const newMessage: MessagesType = {
-      username: "Anonim",
-      message,
-      created_at: new Date().toISOString(),
-    };
+    // const newMessage: MessagesType = {
+    //   username: "Anonim",
+    //   message,
+    //   created_at: new Date().toISOString(),
+    // };
 
-    setMessages((prev) => [...prev, newMessage]); // Tambahkan langsung ke UI
+    // setMessages((prev) => [...prev, newMessage]); // Tambahkan langsung ke UI
     setMessage(""); // Reset input
     setTimeout(handleScroll, 100); // Scroll ke bawah setelah update UI
 
