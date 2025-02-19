@@ -28,7 +28,7 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->to('/articles-detail');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('chat', ChatController::class);
