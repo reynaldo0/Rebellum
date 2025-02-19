@@ -24,7 +24,7 @@ const Chat = () => {
     }, 1000);
 
     axios
-      .get("/chat/")
+      .get("/chat")
       .then((response) => {
         setMessages(response.data.reverse());
         handleScroll();
@@ -69,7 +69,7 @@ const Chat = () => {
     setTimeout(handleScroll, 100); // Scroll ke bawah setelah update UI
 
     try {
-      await axios.post("/chat/", { message });
+      await axios.post("/chat", { message });
     } catch (error) {
       console.error("Error sending message:", error);
     }
