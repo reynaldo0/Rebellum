@@ -6,7 +6,7 @@ import {
   HarmCategory,
 } from "@google/generative-ai";
 
-const apiKey = "AIzaSyDL7oG4m3pZRfVqu71PBTXE_ccV4msSJro";
+const apiKey = import.meta.env.VITE_GOOGLE_AI_API_KEY;
 
 const modelParams = {
   model: "gemini-2.0-flash-exp",

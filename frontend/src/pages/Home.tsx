@@ -50,7 +50,7 @@ const Home = () => {
                         </p>
                         <button
                             className="learn-more relative inline-block h-auto w-[300px] md:w-[450px] cursor-pointer border-none bg-transparent align-middle font-radioCasnada text-inherit outline-none"
-                            onClick={() => (window.location.href = "http://127.0.0.1:8000/")}>
+                            onClick={() => (window.location.href = "http://rebellum.karyasmkn46.info")}>
                             <span className="circle" aria-hidden="true">
                                 <span className="icon arrow"></span>
                             </span>

@@ -32,10 +32,12 @@ const News = () => {
         }
     };
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const postResponse = await fetch("http://127.0.0.1:8000/api/article");
+                const postResponse = await fetch(`${API_BASE_URL}/article`);
                 if (!postResponse.ok) {
                     throw new Error("Failed to fetch data");
                 }
