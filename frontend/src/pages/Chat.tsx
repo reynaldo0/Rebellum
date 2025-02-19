@@ -16,7 +16,6 @@ const Chat = () => {
   const [message, setMessage] = useState<string>("");
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // To keep track of timestamps in real-time
   const [timeNow, setTimeNow] = useState<Date>(new Date());
 
   useEffect(() => {
@@ -34,20 +33,23 @@ const Chat = () => {
         console.error("Error fetching messages:", error);
       });
 
+    // Pastikan pusher berjalan dengan baik
+    Pusher.logToConsole = true;
     const pusher = new Pusher("cb18b6e07fc02084de32", {
       cluster: "ap1",
-      wsHost: "127.0.0.1",
+      forceTLS: true, // Gunakan TLS agar tidak terjadi error koneksi
     });
 
     const channel = pusher.subscribe("chat-channel");
     channel.bind("new-message", (event: any) => {
       setMessages((prev) => [...prev, event.message]);
-      handleScroll();
+      setTimeout(handleScroll, 100); // Tunggu sedikit sebelum scroll
     });
 
     return () => {
       clearInterval(interval);
-      pusher.unsubscribe("chat-channel");
+      channel.unbind_all();
+      channel.unsubscribe();
       pusher.disconnect();
     };
   }, []);
@@ -56,17 +58,17 @@ const Chat = () => {
     e.preventDefault();
     if (message.trim() === "") return;
 
+    const newMessage: MessagesType = {
+      username: "Anonim",
+      message,
+      created_at: new Date().toISOString(),
+    };
+
+    setMessages((prev) => [...prev, newMessage]); // Tambahkan langsung ke UI
+    setMessage(""); // Reset input
+    setTimeout(handleScroll, 100); // Scroll ke bawah setelah update UI
+
     try {
-      // const newMessage = {
-      //   username: "Anonim",
-      //   message,
-      //   created_at: new Date().toISOString(),
-      // };
-      // setMessages((prev) => [...prev, newMessage]);
-
-      setMessage(""); // Reset input
-      handleScroll();
-
       await axios.post("/chat/", { message });
     } catch (error) {
       console.error("Error sending message:", error);
@@ -74,12 +76,9 @@ const Chat = () => {
   };
 
   const handleScroll = () => {
-    setTimeout(() => {
-      if (chatContainerRef.current) {
-        chatContainerRef.current.scrollTop =
-          chatContainerRef.current.scrollHeight;
-      }
-    }, 100);
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   };
 
   const formatDate = (dateString: string) => {

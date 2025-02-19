@@ -172,7 +172,7 @@ const Konsultasi = () => {
 
               <button
                 type="submit"
-                className="mt-2 w-full md:w-[100px] rounded-l-3xl rounded-r-3xl bg-yellow px-5 py-3 text-white"
+                className="mt-2 w-full md:w-full rounded-l-3xl rounded-r-3xl bg-yellow px-5 py-3 text-white"
                 data-aos="fade-up" data-aos-duration="900"
               >
                 Kirim
